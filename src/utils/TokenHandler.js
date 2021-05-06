@@ -18,6 +18,5 @@
 // const tokenHandler = new TokenHandler();
 // export default tokenHandler;
 export const isAuthenticated = () => {
-    console.log(localStorage.getItem('token') ? true : false);
     return localStorage.getItem('token') ? true : false
 };
