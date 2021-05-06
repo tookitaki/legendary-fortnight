@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button, Card, Form, Input, Typography } from 'antd';
 import { loginUser, logoutUser } from '../actions/login';
+import { withRouter } from 'react-router-dom'
 
 const { Text } = Typography;
 const LoginCardStyle = {
@@ -86,7 +87,7 @@ export class Login extends React.Component {
     const { isLoggedIn, } = this.props;
 
     if (isLoggedIn) {
-      window.location = '/dashboard';
+      this.props.history.push("/dashboard");
     }
   }
 
@@ -158,7 +159,7 @@ Login.propTypes = {
   auth: PropTypes.object,
 };
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Login);
+)(Login));
