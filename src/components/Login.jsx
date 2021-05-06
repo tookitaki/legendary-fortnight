@@ -83,10 +83,10 @@ export class Login extends React.Component {
 
   componentDidUpdate() {
     // logic for redirect after successful login
-    const { isLoggedIn, } = this.props;
+    const { isLoggedIn, history, } = this.props;
 
     if (isLoggedIn) {
-      window.location = '/dashboard';
+      history.push("/dashboard");
     }
   }
 
@@ -154,8 +154,10 @@ Login.propTypes = {
   dispatchPostLogin: PropTypes.func,
   dispatchResetLogin: PropTypes.func,
   loading: PropTypes.bool,
+  isLoggedIn: PropTypes.bool,
   error: PropTypes.string,
   auth: PropTypes.object,
+  history: PropTypes.func,
 };
 
 export default connect(
