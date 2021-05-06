@@ -3,20 +3,14 @@ import { APP_CONFIG } from '../utils/appConfig';
 
 const apiUrl = APP_CONFIG.AUTH_URL;
 
-export async function auth (token){
-  const requestUrl = `${apiUrl}/users/login`;
+export async function auth(token) {
+  const requestUrl = `${apiUrl}/users/auth`;
 
   const headers = {
-    'Access-Control-Allow-Origin': '*',
+    'Authorization': `Basic ${token}`,
   };
 
-  const body = { credentials: token };
   //add api calls
-//   return await axios.post(requestUrl, body, { headers, });
-const mockedResonse = {
-    data: { token : "exdfktyasasassasa"},
-    status : 200,
-}
-return mockedResonse;
+  return await axios.post(requestUrl, null, { headers });
 }
 

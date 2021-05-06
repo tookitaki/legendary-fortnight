@@ -12,19 +12,15 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   <ErrorBoundaryWrapper>
     <Route
       {...rest}
-      render={props =>
-        (isAuthenticated) ? (
-          <Component {...props} />
-        ) : (
-          <Redirect
-            to={{
-              pathname: paths.defaultPath,
-              state: {
-                redirectTo: paths.dashboard,
-              },
-            }}
-          />
-        )
+      render={props => {
+        if (isAuthenticated()) {
+          return <Component {...props} />;
+        } else {
+          return <Redirect
+            to="/"
+          />;
+        }
+      }
       }
     />
   </ErrorBoundaryWrapper>

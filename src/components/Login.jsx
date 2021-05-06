@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {Button, Card, Form, Input, Typography} from 'antd';
+import { connect } from 'react-redux';
+import { Button, Card, Form, Input, Typography } from 'antd';
 import { loginUser, logoutUser } from '../actions/login';
 
-const {Text} = Typography;
+const { Text } = Typography;
 const LoginCardStyle = {
   width: '500px',
   marginLeft: 'auto',
@@ -52,7 +52,7 @@ export class Login extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const {username, password} = this.state;
+    const { username, password } = this.state;
     const str = `${username}:${password}`;
     localStorage.setItem("user", username);
     this.props.dispatchLoginUser(btoa(str));
@@ -81,49 +81,59 @@ export class Login extends React.Component {
     this.props.dispatchLogoutUser();
   }
 
-  render() {
-    const {loading, error} = this.props;
+  componentDidUpdate() {
+    // logic for redirect after successful login
+    const { isLoggedIn, } = this.props;
 
-    return(
-    <div>
-      <div style={{width: '100%'}}>
-        <p style={HeaderStyle}>Login</p>
-      </div>
-      <Card style={LoginCardStyle}>
-        <Form layout="vertical" onSubmit={this.handleSubmit}>
-          <Form.Item label="Email">
-            <Input type='text' placeholder="e.g. example@tookitaki.com"
-                   onChange={this.onChange('username')}/>
-          </Form.Item>
-          <Form.Item label="Password">
-            <Input type='password' placeholder="Must contain 8 characters"
-                   onChange={this.onChange('password')}/>
-          </Form.Item>
-          <Form.Item style={{textAlign: 'center'}}>
-            <Button disabled={loading} type="primary" htmlType="submit"
-              loading={loading} block onClick={this.handleSubmit}>
+    if (isLoggedIn) {
+      window.location = '/dashboard';
+    }
+  }
+
+  render() {
+    const { loading, error } = this.props;
+
+    return (
+      <div>
+        <div style={{ width: '100%' }}>
+          <p style={HeaderStyle}>Login</p>
+        </div>
+        <Card style={LoginCardStyle}>
+          <Form layout="vertical" onSubmit={this.handleSubmit}>
+            <Form.Item label="Email">
+              <Input type='text' placeholder="e.g. example@tookitaki.com"
+                onChange={this.onChange('username')} />
+            </Form.Item>
+            <Form.Item label="Password">
+              <Input type='password' placeholder="Must contain 8 characters"
+                onChange={this.onChange('password')} />
+            </Form.Item>
+            <Form.Item style={{ textAlign: 'center' }}>
+              <Button disabled={loading} type="primary" htmlType="submit"
+                loading={loading} block onClick={this.handleSubmit}>
                 Login
             </Button>
-            <Button disabled={loading} type="primary" htmlType="submit"
-              loading={loading} block onClick={this.handleLogout}>
+              <Button disabled={loading} type="primary" htmlType="submit"
+                loading={loading} block onClick={this.handleLogout}>
                 Logout
             </Button>
-          </Form.Item>
-        </Form>
-        {error && (<Text type="danger">{error.data ?
+            </Form.Item>
+          </Form>
+          {error && (<Text type="danger">{error.data ?
             error.data :
             error.message ? error.message : String(error)}</Text>)
-        }
-      </Card>
-    </div>
+          }
+        </Card>
+      </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  const {loading, error, auth} = state.login;
+  const { loading, isLoggedIn, error, auth } = state.login;
   return {
     loading,
+    isLoggedIn,
     error,
     auth,
   };
@@ -149,6 +159,6 @@ Login.propTypes = {
 };
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
+  mapStateToProps,
+  mapDispatchToProps,
 )(Login);
