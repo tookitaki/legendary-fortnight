@@ -1,14 +1,24 @@
 import { all, takeEvery, put, call } from 'redux-saga/effects'
-import { auth } from '../services/auth';
+import { auth, logout, } from '../services/auth';
 import {
   LOGIN_USER,
   LOGOUT_USER,
   logoutUser,
-  loginUserSuccess
+  loginUserSuccess,
+  logoutUserSuccess,
 } from '../actions/login'
 
 export function* logoutUserSaga() {
-  localStorage.removeItem('token');
+  try {
+    const token = localStorage.getItem('token');
+    const authResponse = yield call(logout, token);
+    if (authResponse.status === 200) {
+      localStorage.removeItem('token');
+      yield put(logoutUserSuccess());
+    }
+  } catch (error) {
+    // yield put(logoutUser());
+  }
 }
 
 export function* loginUserSaga(action) {
