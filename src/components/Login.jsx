@@ -5,68 +5,24 @@ import { Button, Card, Form, Input, Typography } from 'antd';
 import { loginUser, logoutUser } from '../actions/login';
 
 const { Text } = Typography;
-const LoginCardStyle = {
-  width: '500px',
-  marginLeft: 'auto',
-  marginRight: 'auto',
-  marginTop: '35px',
-  border: '1px solid #D0D7E3',
-  borderRadius: '4px',
-  padding: '10px',
-};
-
-const LogoStyle = {
-  width: '123px',
-  height: '107px',
-  marginLeft: 'auto',
-  marginRight: 'auto',
-  display: 'block',
-};
-
-const HeaderStyle = {
-  marginLeft: 'auto',
-  marginRight: 'auto',
-  marginTop: '15px',
-  display: 'block',
-  fontStyle: 'normal',
-  fontWeight: '600',
-  fontSize: '16px',
-  color: '#36465E',
-  width: '100%',
-  textAlign: 'center',
-};
-
-const CardTitleStyle = {
-  fontFamily: 'Rubik',
-  fontWeight: 500,
-  fontSize: '16px',
-  color: '#212121',
-  textAlign: 'center'
-};
-
+//TODO to convert it inot functional component
 export class Login extends React.Component {
   state = {
     username: null,
-    password: null,
+    password: null
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
     const { username, password } = this.state;
     const str = `${username}:${password}`;
-    localStorage.setItem("user", username);
+    localStorage.setItem('user', username);
     this.props.dispatchLoginUser(btoa(str));
-    this.setState({
-      ...this.state,
-    });
   };
 
   handleLogout = (e) => {
     e.preventDefault();
     this.props.dispatchLogoutUser();
-    this.setState({
-      ...this.state,
-    });
   };
 
   onChange = (key) => {
@@ -83,7 +39,7 @@ export class Login extends React.Component {
 
   componentDidUpdate() {
     // logic for redirect after successful login
-    const { isLoggedIn, } = this.props;
+    const { isLoggedIn } = this.props;
 
     if (isLoggedIn) {
       window.location = '/dashboard';
@@ -101,33 +57,73 @@ export class Login extends React.Component {
         <Card style={LoginCardStyle}>
           <Form layout="vertical" onSubmit={this.handleSubmit}>
             <Form.Item label="Email">
-              <Input type='text' placeholder="e.g. example@tookitaki.com"
-                onChange={this.onChange('username')} />
+              <Input
+                type="text"
+                placeholder="e.g. example@tookitaki.com"
+                onChange={this.onChange('username')}
+              />
             </Form.Item>
             <Form.Item label="Password">
-              <Input type='password' placeholder="Must contain 8 characters"
-                onChange={this.onChange('password')} />
+              <Input
+                type="password"
+                placeholder="Must contain 8 characters"
+                onChange={this.onChange('password')}
+              />
             </Form.Item>
             <Form.Item style={{ textAlign: 'center' }}>
-              <Button disabled={loading} type="primary" htmlType="submit"
-                loading={loading} block onClick={this.handleSubmit}>
+              <Button
+                disabled={loading}
+                type="primary"
+                htmlType="submit"
+                loading={loading}
+                block
+                onClick={this.handleSubmit}>
                 Login
-            </Button>
-              <Button disabled={loading} type="primary" htmlType="submit"
-                loading={loading} block onClick={this.handleLogout}>
+              </Button>
+              <Button
+                disabled={loading}
+                type="primary"
+                htmlType="submit"
+                loading={loading}
+                block
+                onClick={this.handleLogout}>
                 Logout
-            </Button>
+              </Button>
             </Form.Item>
           </Form>
-          {error && (<Text type="danger">{error.data ?
-            error.data :
-            error.message ? error.message : String(error)}</Text>)
-          }
+          {error && (
+            <Text type="danger">
+              {error.data || error.message || String(error)}
+            </Text>
+          )}
         </Card>
       </div>
     );
   }
 }
+
+const LoginCardStyle = {
+  width: '500px',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  marginTop: '35px',
+  border: '1px solid #D0D7E3',
+  borderRadius: '4px',
+  padding: '10px'
+};
+
+const HeaderStyle = {
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  marginTop: '15px',
+  display: 'block',
+  fontStyle: 'normal',
+  fontWeight: '600',
+  fontSize: '16px',
+  color: '#36465E',
+  width: '100%',
+  textAlign: 'center'
+};
 
 function mapStateToProps(state) {
   const { loading, isLoggedIn, error, auth } = state.login;
@@ -135,7 +131,7 @@ function mapStateToProps(state) {
     loading,
     isLoggedIn,
     error,
-    auth,
+    auth
   };
 }
 
@@ -146,7 +142,7 @@ function mapDispatchToProps(dispatch) {
     },
     dispatchLogoutUser: () => {
       dispatch(logoutUser());
-    },
+    }
   };
 }
 
@@ -155,10 +151,7 @@ Login.propTypes = {
   dispatchResetLogin: PropTypes.func,
   loading: PropTypes.bool,
   error: PropTypes.string,
-  auth: PropTypes.object,
+  auth: PropTypes.object
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

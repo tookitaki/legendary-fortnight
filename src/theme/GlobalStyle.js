@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
- 
+
 const GlobalStyle = createGlobalStyle`
   body {
     line-height: 1.4em;
@@ -8,5 +8,5 @@ const GlobalStyle = createGlobalStyle`
     font: 12px Rubik, Roboto,'Helvetica Neue',Arial,'Open sans', sans-serif; 
   }
 `;
- 
+
 export default GlobalStyle;

@@ -1,7 +1,7 @@
-import React, { lazy } from 'react';
+import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import Dashboard from '../components/Dashboard';
-import Loading from '../components/Loader';
+import Loading from '../components/Loading';
 import Login from '../components/Login';
 import ErrorBoundaryWrapper from '../components/ErrorBoundaryWrapper';
 import { isAuthenticated } from '../utils/TokenHandler';
@@ -12,16 +12,13 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   <ErrorBoundaryWrapper>
     <Route
       {...rest}
-      render={props => {
+      render={(props) => {
         if (isAuthenticated()) {
           return <Component {...props} />;
         } else {
-          return <Redirect
-            to="/"
-          />;
+          return <Redirect to="/" />;
         }
-      }
-      }
+      }}
     />
   </ErrorBoundaryWrapper>
 );

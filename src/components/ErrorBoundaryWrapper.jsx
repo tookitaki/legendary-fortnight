@@ -6,7 +6,7 @@ import history from '../utils/history';
 
 class ErrorBoundaryWrapper extends PureComponent {
   state = {
-    hasError: false,
+    hasError: false
   };
 
   static getDerivedStateFromError() {
@@ -30,6 +30,6 @@ class ErrorBoundaryWrapper extends PureComponent {
 }
 
 ErrorBoundaryWrapper.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 };
 export default ErrorBoundaryWrapper;
