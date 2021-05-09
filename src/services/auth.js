@@ -13,3 +13,11 @@ export async function auth(token) {
   //add api calls
   return await axios.post(requestUrl, null, { headers });
 }
+
+export async function logout(token) {
+  const requestUrl = `${apiUrl}/users/session`;
+  const headers = {
+    Authorization: `Token ${token}`
+  };
+  return await axios.delete(requestUrl, { headers });
+}

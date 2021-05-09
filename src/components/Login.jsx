@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button, Card, Form, Input, Typography } from 'antd';
 import { loginUser, logoutUser } from '../actions/login';
+import { withRouter } from 'react-router-dom';
 
 const { Text } = Typography;
 //TODO to convert it inot functional component
@@ -39,10 +40,10 @@ export class Login extends React.Component {
 
   componentDidUpdate() {
     // logic for redirect after successful login
-    const { isLoggedIn } = this.props;
+    const { isLoggedIn, history } = this.props;
 
     if (isLoggedIn) {
-      window.location = '/dashboard';
+      history.push('/dashboard');
     }
   }
 
@@ -150,8 +151,10 @@ Login.propTypes = {
   dispatchPostLogin: PropTypes.func,
   dispatchResetLogin: PropTypes.func,
   loading: PropTypes.bool,
+  isLoggedIn: PropTypes.bool,
   error: PropTypes.string,
-  auth: PropTypes.object
+  auth: PropTypes.object,
+  history: PropTypes.func
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));
