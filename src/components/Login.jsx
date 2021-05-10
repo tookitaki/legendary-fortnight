@@ -1,107 +1,97 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button, Card, Form, Input, Typography } from 'antd';
 import { loginUser, logoutUser } from '../actions/login';
 import { withRouter } from 'react-router-dom';
+import { getLoginDetails } from '../selectors/loginSelector';
 
 const { Text } = Typography;
-//TODO to convert it inot functional component
-export class Login extends React.Component {
-  state = {
-    username: null,
-    password: null
-  };
+const Login = ({ login, dispatchLoginUser, dispatchLogoutUser, history }) => {
+  const { loading, isLoggedIn, error } = login;
+  const [state, setState] = useState({
+    username: '',
+    password: ''
+  });
 
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const { username, password } = this.state;
-    const str = `${username}:${password}`;
-    localStorage.setItem('user', username);
-    this.props.dispatchLoginUser(btoa(str));
+    const str = `${state.username}:${state.password}`;
+    localStorage.setItem('user', state.username);
+    dispatchLoginUser(btoa(str));
   };
 
-  handleLogout = (e) => {
+  const handleLogout = (e) => {
     e.preventDefault();
-    this.props.dispatchLogoutUser();
+    dispatchLogoutUser();
   };
 
-  onChange = (key) => {
-    return (e) => {
-      let state = this.state;
-      state[key] = e.target.value;
-      this.setState(state);
-    };
-  };
+  useEffect(() => {
+    dispatchLogoutUser();
+  }, [dispatchLogoutUser]);
 
-  componentDidMount() {
-    this.props.dispatchLogoutUser();
-  }
-
-  componentDidUpdate() {
-    // logic for redirect after successful login
-    const { isLoggedIn, history } = this.props;
-
+  useEffect(() => {
     if (isLoggedIn) {
       history.push('/dashboard');
     }
-  }
+  }, [isLoggedIn, history]);
 
-  render() {
-    const { loading, error } = this.props;
+  const onChange = (key, e) => {
+    state[key] = e.target.value;
+    setState(state);
+  };
 
-    return (
-      <div>
-        <div style={{ width: '100%' }}>
-          <p style={HeaderStyle}>Login</p>
-        </div>
-        <Card style={LoginCardStyle}>
-          <Form layout="vertical" onSubmit={this.handleSubmit}>
-            <Form.Item label="Email">
-              <Input
-                type="text"
-                placeholder="e.g. example@tookitaki.com"
-                onChange={this.onChange('username')}
-              />
-            </Form.Item>
-            <Form.Item label="Password">
-              <Input
-                type="password"
-                placeholder="Must contain 8 characters"
-                onChange={this.onChange('password')}
-              />
-            </Form.Item>
-            <Form.Item style={{ textAlign: 'center' }}>
-              <Button
-                disabled={loading}
-                type="primary"
-                htmlType="submit"
-                loading={loading}
-                block
-                onClick={this.handleSubmit}>
-                Login
-              </Button>
-              <Button
-                disabled={loading}
-                type="primary"
-                htmlType="submit"
-                loading={loading}
-                block
-                onClick={this.handleLogout}>
-                Logout
-              </Button>
-            </Form.Item>
-          </Form>
-          {error && (
-            <Text type="danger">
-              {error.data || error.message || String(error)}
-            </Text>
-          )}
-        </Card>
+  return (
+    <div>
+      <div style={{ width: '100%' }}>
+        <p style={HeaderStyle}>Login</p>
       </div>
-    );
-  }
-}
+      <Card style={LoginCardStyle}>
+        <Form layout="vertical" onSubmit={handleSubmit}>
+          <Form.Item label="Email">
+            <Input
+              type="text"
+              placeholder="e.g. example@tookitaki.com"
+              onChange={(e) => onChange('username', e)}
+            />
+          </Form.Item>
+          <Form.Item label="Password">
+            <Input
+              type="password"
+              placeholder="Must contain 8 characters"
+              onChange={(e) => onChange('password', e)}
+            />
+          </Form.Item>
+          <Form.Item style={{ textAlign: 'center' }}>
+            <Button
+              disabled={loading}
+              type="primary"
+              htmlType="submit"
+              loading={loading}
+              block
+              onClick={handleSubmit}>
+              Login
+            </Button>
+            <Button
+              disabled={loading}
+              type="primary"
+              htmlType="submit"
+              loading={loading}
+              block
+              onClick={handleLogout}>
+              Logout
+            </Button>
+          </Form.Item>
+        </Form>
+        {error && (
+          <Text type="danger">
+            {error.data || error.message || String(error)}
+          </Text>
+        )}
+      </Card>
+    </div>
+  );
+};
 
 const LoginCardStyle = {
   width: '500px',
@@ -127,12 +117,8 @@ const HeaderStyle = {
 };
 
 function mapStateToProps(state) {
-  const { loading, isLoggedIn, error, auth } = state.login;
   return {
-    loading,
-    isLoggedIn,
-    error,
-    auth
+    login: getLoginDetails(state)
   };
 }
 
@@ -153,7 +139,6 @@ Login.propTypes = {
   loading: PropTypes.bool,
   isLoggedIn: PropTypes.bool,
   error: PropTypes.string,
-  auth: PropTypes.object,
   history: PropTypes.func
 };
 

@@ -5,12 +5,7 @@ import { Button } from 'antd';
 import styled from 'styled-components';
 
 import { logoutUser } from '../actions/login';
-
-const Heading = styled.h1`
-  font-size: ${({ isHeading, theme: { fontSizes } }) =>
-    isHeading ? fontSizes.large : fontSizes.small};
-  color: ${({ theme: { colors } }) => colors.persianGreen};
-`;
+import Loading from './Loading';
 
 export class Dashboard extends React.Component {
   handleLogout = (e) => {
@@ -34,6 +29,7 @@ export class Dashboard extends React.Component {
     return (
       <div>
         <Heading isHeading={true}>Hello World</Heading>
+        <Loading />
         <h2>By the power of styled-components!</h2>
         <Button
           disabled={loading}
@@ -48,6 +44,12 @@ export class Dashboard extends React.Component {
     );
   }
 }
+
+const Heading = styled.h1`
+  font-size: ${({ isHeading, theme: { fontSizes } }) =>
+    isHeading ? fontSizes.large : fontSizes.small};
+  color: ${({ theme: { colors } }) => colors.persianGreen};
+`;
 
 function mapStateToProps(state) {
   const { loading, isLoggedIn, error, auth } = state.login;

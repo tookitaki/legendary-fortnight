@@ -11,7 +11,12 @@ export async function auth(token) {
   };
 
   //add api calls
-  return await axios.post(requestUrl, null, { headers });
+  // return await axios.post(requestUrl, null, { headers });
+  const data = {
+    status: 200,
+    data: { token: 'erererreer' }
+  };
+  return data;
 }
 
 export async function logout(token) {

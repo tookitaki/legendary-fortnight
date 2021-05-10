@@ -1,17 +1,22 @@
 import React from 'react';
 import { Spin } from 'antd';
+import styled from 'styled-components';
 
-const Loading = () => (
-  <div
-    style={{
-      position: 'fixed',
-      top: '50%',
-      left: '50%',
-      color: '#3F516F',
-      fontSize: '14px'
-    }}>
-    {' '}
-    <Spin size="large" />
-  </div>
-);
+const Loading = () => {
+  return (
+    <Div>
+      {' '}
+      <Spin size="large" />
+    </Div>
+  );
+};
+
+const Div = styled.div`
+  position: fixed;
+  top: 0;
+  left: 50%;
+  color: '#3F516F';
+  font-size: 14px;
+`;
+
 export default Loading;

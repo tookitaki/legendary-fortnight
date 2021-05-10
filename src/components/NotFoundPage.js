@@ -1,24 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 const NotFoundPage = () => {
-  const style = {
-    textAlign: 'center',
-    fontSize: '16px',
-    color: '#31394D'
-  };
   return (
-    <div style={style}>
-      <h4 style={{ fontSize: '24px', marginTop: '20px', marginBottom: '20px' }}>
-        404 Page Not Found
-      </h4>
+    <Div>
+      <Heading>404 Page Not Found</Heading>
       <p>
         Sorry, we cannot find the page you are looking for or you don&apos;t
         currently have the permission to access.
       </p>
       <Link to="/"> Go back to homepage </Link>
-    </div>
+    </Div>
   );
 };
+const Div = styled.div`
+  text-align: center;
+  font-size: 16px;
+  color: '#31394D';
+`;
+const Heading = styled.h4`
+  font-size: 24px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+`;
 
 export default NotFoundPage;
