@@ -10,7 +10,6 @@ export async function auth(token) {
     Authorization: `Basic ${token}`
   };
 
-  //add api calls
   return await axios.post(requestUrl, null, { headers });
   // const data = {
   //   status: 200,

@@ -1,4 +1,3 @@
-// import { Login } from '../Login';
 import { Login } from '../Login';
 import history from '../../utils/history';
 import { fireEvent, render } from '@testing-library/react';

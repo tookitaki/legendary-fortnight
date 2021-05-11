@@ -8,7 +8,6 @@ import Logout from './Logout';
 
 const { Text } = Typography;
 export const Login = ({ login, dispatchLoginUser, history }) => {
-  debugger;
   const { loading, isLoggedIn, error } = login;
   const [state, setState] = useState({
     username: '',
