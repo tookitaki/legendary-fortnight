@@ -2,11 +2,11 @@ import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import Dashboard from '../components/Dashboard';
 import Loading from '../components/Loading';
-import Login from '../components/Login';
 import ErrorBoundaryWrapper from '../components/ErrorBoundaryWrapper';
 import { isAuthenticated } from '../utils/TokenHandler';
 import paths from '../utils/path';
 import NotFoundPage from '../components/NotFoundPage';
+import LoginContainer from '../containers/LoginContainer';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <ErrorBoundaryWrapper>
@@ -28,7 +28,7 @@ const Routes = () => {
   return (
     <React.Suspense fallback={<Loading />}>
       <Switch>
-        <Route exact path={defaultPath} component={Login} />
+        <Route exact path={defaultPath} component={LoginContainer} />
         <PrivateRoute exact path={dashboard} component={Dashboard} />
         <Route exact path={error} component={NotFoundPage} />
       </Switch>

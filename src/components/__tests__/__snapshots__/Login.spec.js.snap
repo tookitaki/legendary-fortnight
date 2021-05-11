@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Login /> should render login snapshot 1`] = `
+<div>
+  <div>
+    <div
+      style="width: 100%;"
+    >
+      <p
+        style="margin-left: auto; margin-right: auto; margin-top: 15px; display: block; font-style: normal; font-weight: 600; font-size: 16px; color: rgb(54, 70, 94); width: 100%; text-align: center;"
+      >
+        Login
+      </p>
+    </div>
+    <div
+      class="ant-card ant-card-bordered"
+      style="width: 500px; margin-left: auto; margin-right: auto; margin-top: 35px; border: 1px solid #d0d7e3; border-radius: 4px; padding: 10px;"
+    >
+      <div
+        class="ant-card-body"
+      >
+        <form
+          class="ant-form ant-form-vertical"
+        >
+          <div
+            class="ant-row ant-form-item"
+          >
+            <div
+              class="ant-col ant-form-item-label"
+            >
+              <label
+                class=""
+                title="Email"
+              >
+                Email
+              </label>
+            </div>
+            <div
+              class="ant-col ant-form-item-control"
+            >
+              <div
+                class="ant-form-item-control-input"
+              >
+                <div
+                  class="ant-form-item-control-input-content"
+                >
+                  <input
+                    class="ant-input"
+                    data-testid="username"
+                    id="username"
+                    placeholder="e.g. example@tookitaki.com"
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-row ant-form-item"
+          >
+            <div
+              class="ant-col ant-form-item-label"
+            >
+              <label
+                class=""
+                title="Password"
+              >
+                Password
+              </label>
+            </div>
+            <div
+              class="ant-col ant-form-item-control"
+            >
+              <div
+                class="ant-form-item-control-input"
+              >
+                <div
+                  class="ant-form-item-control-input-content"
+                >
+                  <input
+                    class="ant-input"
+                    data-testid="password"
+                    id="password"
+                    placeholder="Must contain 8 characters"
+                    type="password"
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-row ant-form-item"
+            style="text-align: center;"
+          >
+            <div
+              class="ant-col ant-form-item-control"
+            >
+              <div
+                class="ant-form-item-control-input"
+              >
+                <div
+                  class="ant-form-item-control-input-content"
+                >
+                  <button
+                    class="ant-btn ant-btn-primary ant-btn-block"
+                    data-testid="login"
+                    id="login"
+                    type="submit"
+                  >
+                    <span>
+                      Login
+                    </span>
+                  </button>
+                  <div>
+                    Logout
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,49 +1,26 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Button } from 'antd';
 import styled from 'styled-components';
-
-import { logoutUser } from '../actions/login';
 import Loading from './Loading';
+import Logout from './Logout';
 
-export class Dashboard extends React.Component {
-  handleLogout = (e) => {
-    e.preventDefault();
-    this.props.dispatchLogoutUser();
-    this.setState({
-      ...this.state
-    });
-  };
-
-  componentDidUpdate() {
-    const { isLoggedIn, history } = this.props;
-
+const Dashboard = ({ loading, isLoggedIn, history }) => {
+  useEffect(() => {
     if (!isLoggedIn) {
       history.push('/');
     }
-  }
+  }, [isLoggedIn, history]);
 
-  render() {
-    const { loading } = this.props;
-    return (
-      <div>
-        <Heading isHeading={true}>Hello World</Heading>
-        <Loading />
-        <h2>By the power of styled-components!</h2>
-        <Button
-          disabled={loading}
-          type="primary"
-          htmlType="submit"
-          loading={loading}
-          block
-          onClick={this.handleLogout}>
-          Logout
-        </Button>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <Heading isHeading={true}>Hello World</Heading>
+      <Loading />
+      <h2>By the power of styled-components!</h2>
+      <Logout loading={loading} />
+    </div>
+  );
+};
 
 const Heading = styled.h1`
   font-size: ${({ isHeading, theme: { fontSizes } }) =>
@@ -52,23 +29,12 @@ const Heading = styled.h1`
 `;
 
 function mapStateToProps(state) {
-  const { loading, isLoggedIn, error, auth } = state.login;
+  const { loading, isLoggedIn, error } = state.login;
   return {
     loading,
     isLoggedIn,
-    error,
-    auth
+    error
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatchLogoutUser: () => {
-      dispatch(logoutUser());
-    }
-  };
-}
-
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(Dashboard)
-);
+export default withRouter(connect(mapStateToProps, null)(Dashboard));

@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Button, Card, Form, Input, Typography } from 'antd';
-import { loginUser, logoutUser } from '../actions/login';
-import { withRouter } from 'react-router-dom';
-import { getLoginDetails } from '../selectors/loginSelector';
+import Logout from './Logout';
 
 const { Text } = Typography;
 const Login = ({ login, dispatchLoginUser, dispatchLogoutUser, history }) => {
+  debugger;
   const { loading, isLoggedIn, error } = login;
   const [state, setState] = useState({
     username: '',
@@ -19,11 +17,6 @@ const Login = ({ login, dispatchLoginUser, dispatchLogoutUser, history }) => {
     const str = `${state.username}:${state.password}`;
     localStorage.setItem('user', state.username);
     dispatchLoginUser(btoa(str));
-  };
-
-  const handleLogout = (e) => {
-    e.preventDefault();
-    dispatchLogoutUser();
   };
 
   useEffect(() => {
@@ -50,6 +43,8 @@ const Login = ({ login, dispatchLoginUser, dispatchLogoutUser, history }) => {
         <Form layout="vertical" onSubmit={handleSubmit}>
           <Form.Item label="Email">
             <Input
+              id="username"
+              data-testid="username"
               type="text"
               placeholder="e.g. example@tookitaki.com"
               onChange={(e) => onChange('username', e)}
@@ -57,6 +52,8 @@ const Login = ({ login, dispatchLoginUser, dispatchLogoutUser, history }) => {
           </Form.Item>
           <Form.Item label="Password">
             <Input
+              id="password"
+              data-testid="password"
               type="password"
               placeholder="Must contain 8 characters"
               onChange={(e) => onChange('password', e)}
@@ -64,6 +61,8 @@ const Login = ({ login, dispatchLoginUser, dispatchLogoutUser, history }) => {
           </Form.Item>
           <Form.Item style={{ textAlign: 'center' }}>
             <Button
+              id="login"
+              data-testid="login"
               disabled={loading}
               type="primary"
               htmlType="submit"
@@ -72,15 +71,7 @@ const Login = ({ login, dispatchLoginUser, dispatchLogoutUser, history }) => {
               onClick={handleSubmit}>
               Login
             </Button>
-            <Button
-              disabled={loading}
-              type="primary"
-              htmlType="submit"
-              loading={loading}
-              block
-              onClick={handleLogout}>
-              Logout
-            </Button>
+            <Logout loading={loading} />
           </Form.Item>
         </Form>
         {error && (
@@ -116,30 +107,12 @@ const HeaderStyle = {
   textAlign: 'center'
 };
 
-function mapStateToProps(state) {
-  return {
-    login: getLoginDetails(state)
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatchLoginUser: (token) => {
-      dispatch(loginUser(token));
-    },
-    dispatchLogoutUser: () => {
-      dispatch(logoutUser());
-    }
-  };
-}
-
 Login.propTypes = {
-  dispatchPostLogin: PropTypes.func,
-  dispatchResetLogin: PropTypes.func,
+  dispatchLoginUser: PropTypes.func,
   loading: PropTypes.bool,
   isLoggedIn: PropTypes.bool,
   error: PropTypes.string,
   history: PropTypes.func
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));
+export default Login;

@@ -4,8 +4,7 @@ import {
   LOGIN_USER,
   LOGOUT_USER,
   logoutUser,
-  loginUserSuccess,
-  logoutUserSuccess
+  loginUserSuccess
 } from '../actions/login';
 
 export function* logoutUserSaga() {
@@ -14,7 +13,6 @@ export function* logoutUserSaga() {
     const authResponse = yield call(logout, token);
     if (authResponse.status === 200) {
       localStorage.removeItem('token');
-      yield put(logoutUserSuccess());
     }
   } catch (error) {
     // yield put(logoutUser());
