@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card, Form, Input, Typography } from 'antd';
+import { connect } from 'react-redux';
+import { loginUser } from '../actions/login';
+import { getLoginDetails } from '../selectors/loginSelector';
 import Logout from './Logout';
 
 const { Text } = Typography;
-const Login = ({ login, dispatchLoginUser, dispatchLogoutUser, history }) => {
+export const Login = ({ login, dispatchLoginUser, history }) => {
   debugger;
   const { loading, isLoggedIn, error } = login;
   const [state, setState] = useState({
@@ -18,10 +21,6 @@ const Login = ({ login, dispatchLoginUser, dispatchLogoutUser, history }) => {
     localStorage.setItem('user', state.username);
     dispatchLoginUser(btoa(str));
   };
-
-  useEffect(() => {
-    dispatchLogoutUser();
-  }, [dispatchLogoutUser]);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -109,10 +108,26 @@ const HeaderStyle = {
 
 Login.propTypes = {
   dispatchLoginUser: PropTypes.func,
-  loading: PropTypes.bool,
-  isLoggedIn: PropTypes.bool,
-  error: PropTypes.string,
+  login: PropTypes.shape({
+    loading: PropTypes.bool,
+    isLoggedIn: PropTypes.bool,
+    error: PropTypes.string
+  }),
   history: PropTypes.func
 };
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    login: getLoginDetails(state)
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatchLoginUser: (payload) => {
+      dispatch(loginUser(payload));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

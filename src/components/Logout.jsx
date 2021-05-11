@@ -3,7 +3,7 @@ import { Button } from 'antd';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions/login';
 
-function Logout({ loading, dispatchLogoutUser }) {
+export function Logout({ loading, dispatchLogoutUser }) {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatchLogoutUser();
@@ -11,6 +11,8 @@ function Logout({ loading, dispatchLogoutUser }) {
 
   return (
     <Button
+      id="login"
+      data-testid="login"
       disabled={loading}
       type="primary"
       htmlType="submit"

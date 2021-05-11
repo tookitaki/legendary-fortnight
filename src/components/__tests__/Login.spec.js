@@ -1,4 +1,5 @@
-import Login from '../Login';
+// import { Login } from '../Login';
+import { Login } from '../Login';
 import history from '../../utils/history';
 import { fireEvent, render } from '@testing-library/react';
 
@@ -43,7 +44,7 @@ describe('<Login />', () => {
     expect(component.container).toMatchSnapshot();
   });
 
-  it('should call login on clieck of LOGIN button', () => {
+  it('should call login on click of LOGIN button', () => {
     const { getByTestId } = component;
 
     const username = getByTestId('username');

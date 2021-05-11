@@ -6,7 +6,7 @@ import ErrorBoundaryWrapper from '../components/ErrorBoundaryWrapper';
 import { isAuthenticated } from '../utils/TokenHandler';
 import paths from '../utils/path';
 import NotFoundPage from '../components/NotFoundPage';
-import LoginContainer from '../containers/LoginContainer';
+import Login from '../components/Login';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <ErrorBoundaryWrapper>
@@ -28,7 +28,7 @@ const Routes = () => {
   return (
     <React.Suspense fallback={<Loading />}>
       <Switch>
-        <Route exact path={defaultPath} component={LoginContainer} />
+        <Route exact path={defaultPath} component={Login} />
         <PrivateRoute exact path={dashboard} component={Dashboard} />
         <Route exact path={error} component={NotFoundPage} />
       </Switch>
