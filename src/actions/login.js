@@ -1,4 +1,4 @@
-import actionCreator from '../utils/actionsUtil';
+import actionCreator from '../utils/action';
 
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';

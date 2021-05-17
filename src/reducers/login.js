@@ -1,7 +1,7 @@
 import produce from 'immer';
 
 import { LOGIN_USER, LOGIN_USER_SUCCESS, LOGOUT_USER } from '../actions/login';
-import createReducer from '../utils/reducersUtil';
+import createReducer from '../utils/reducer';
 
 const initialState = { isLoggedIn: false, loading: false, error: null };
 

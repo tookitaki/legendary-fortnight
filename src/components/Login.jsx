@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { Button, Card, Form, Input, Typography } from 'antd';
 import { connect } from 'react-redux';
 import { loginUser } from '../actions/login';
-import { getLoginDetails } from '../selectors/loginSelector';
+import { getLoginDetails } from '../selectors/login';
 import Logout from './Logout';
+import paths from '../utils/path';
 
 const { Text } = Typography;
 export const Login = ({ login, dispatchLoginUser, history }) => {
@@ -23,7 +24,7 @@ export const Login = ({ login, dispatchLoginUser, history }) => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      history.push('/dashboard');
+      history.push(paths.dashboard);
     }
   }, [isLoggedIn, history]);
 
@@ -121,12 +122,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    dispatchLoginUser: (payload) => {
-      dispatch(loginUser(payload));
-    }
-  };
+const mapDispatchToProps = {
+  dispatchLoginUser: (payload) => loginUser(payload)
 };
-
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

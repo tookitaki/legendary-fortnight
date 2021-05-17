@@ -8,7 +8,7 @@ export const createPath = (param) => {
 };
 
 const paths = {
-  defaultPath: createPath('/'),
+  defaultPath: createPath(''),
   dashboard: createPath('dashboard'),
   error: createPath('systemFailure')
 };

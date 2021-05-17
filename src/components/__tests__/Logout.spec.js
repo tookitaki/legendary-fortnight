@@ -10,14 +10,16 @@ describe('<Logout />', () => {
     component = render(<Logout {...props} />);
   });
 
-  it('should render logout snapshot', () => {
-    expect(component.container).toMatchSnapshot();
+  it('should render logout component with display text Logout', () => {
+    const { getByText } = component;
+    const logout = getByText('Logout');
+    expect(logout).toBeTruthy();
   });
 
   it('should call login on click of LOGIN button', () => {
     const { getByTestId } = component;
 
-    const logout = getByTestId('login');
+    const logout = getByTestId('logout');
     fireEvent.click(logout, { preventDefault: jest.fn() });
     expect(props.dispatchLogoutUser).toHaveBeenCalledTimes(1);
   });

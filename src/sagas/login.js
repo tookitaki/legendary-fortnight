@@ -15,7 +15,7 @@ export function* logoutUserSaga() {
       localStorage.removeItem('token');
     }
   } catch (error) {
-    // yield put(logoutUser());
+    yield put(logoutUser());
   }
 }
 
