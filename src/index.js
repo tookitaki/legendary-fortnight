@@ -8,6 +8,7 @@ import Routes from './routes/Routes';
 import history from './utils/history';
 import reportWebVitals from './reportWebVitals';
 import { Router } from 'react-router';
+import 'antd/dist/antd.css';
 
 ReactDOM.render(
   <Theme>

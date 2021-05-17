@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import Loading from './Loading';
 import Logout from './Logout';
 
+import { AppLayout, } from './AppLayout/';
+
 const Dashboard = ({ loading, isLoggedIn, history }) => {
   useEffect(() => {
     if (!isLoggedIn) {
@@ -13,12 +15,14 @@ const Dashboard = ({ loading, isLoggedIn, history }) => {
   }, [isLoggedIn, history]);
 
   return (
-    <div>
-      <Heading isHeading={true}>Hello World</Heading>
-      <Loading />
-      <h2>By the power of styled-components!</h2>
-      <Logout loading={loading} />
-    </div>
+    <AppLayout>
+      <div>
+        <Heading isHeading={true}>Hello World</Heading>
+        <Loading />
+        <h2>By the power of styled-components!</h2>
+        <Logout loading={loading} />
+      </div>
+    </AppLayout>
   );
 };
 
