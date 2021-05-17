@@ -4,7 +4,6 @@ import { APP_CONFIG } from '../constants/appConfig';
 const apiUrl = APP_CONFIG.AUTH_URL;
 
 export async function auth(token) {
-  console.log('apiUrl', apiUrl);
   const requestUrl = `${apiUrl}/users/auth`;
 
   const headers = {
