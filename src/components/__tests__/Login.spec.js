@@ -39,8 +39,10 @@ describe('<Login />', () => {
     history.push.mockClear();
   });
 
-  it('should render login snapshot', () => {
-    expect(component.container).toMatchSnapshot();
+  it('should render login component with dispaly text Login', () => {
+    const { queryAllByText } = component;
+    const logout = queryAllByText('Login');
+    expect(logout).toHaveLength(2);
   });
 
   it('should call login on click of LOGIN button', () => {

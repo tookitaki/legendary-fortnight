@@ -9,13 +9,7 @@ export async function auth(token) {
   const headers = {
     Authorization: `Basic ${token}`
   };
-
   return await axios.post(requestUrl, null, { headers });
-  // const data = {
-  //   status: 200,
-  //   data: { token: 'erererreer' }
-  // };
-  // return data;
 }
 
 export async function logout(token) {

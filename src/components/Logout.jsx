@@ -11,8 +11,8 @@ export function Logout({ loading, dispatchLogoutUser }) {
 
   return (
     <Button
-      id="login"
-      data-testid="login"
+      id="logout"
+      data-testid="logout"
       disabled={loading}
       type="primary"
       htmlType="submit"
@@ -24,17 +24,13 @@ export function Logout({ loading, dispatchLogoutUser }) {
   );
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatchLogoutUser: () => {
-      dispatch(logoutUser());
-    }
-  };
-}
+const mapDispatchToProps2 = {
+  dispatchLogoutUser: () => logoutUser()
+};
 
 Logout.propTypes = {
   dispatchLogoutUser: PropTypes.func,
   loading: PropTypes.bool
 };
 
-export default connect(null, mapDispatchToProps)(Logout);
+export default connect(null, mapDispatchToProps2)(Logout);

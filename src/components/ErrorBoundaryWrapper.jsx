@@ -5,27 +5,17 @@ import paths from '../utils/path';
 import history from '../utils/history';
 
 class ErrorBoundaryWrapper extends PureComponent {
-  state = {
-    hasError: false
-  };
-
   static getDerivedStateFromError() {
-    return { hasError: true };
+    history.push(paths.error);
   }
 
   componentDidCatch() {
-    this.setState({ hasError: true });
+    history.push(paths.error);
   }
 
-  renderErrorPage = () => {
-    this.setState({ hasError: false });
-    return history.push(paths.error);
-  };
-
   render() {
-    const { hasError } = this.state;
     const { children } = this.props;
-    return <>{hasError ? this.renderErrorPage() : children}</>;
+    return <>{children}</>;
   }
 }
 

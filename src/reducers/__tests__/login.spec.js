@@ -1,8 +1,4 @@
-import {
-  loginUser,
-  LOGIN_USER_SUCCESS,
-  LOGOUT_USER
-} from '../../actions/login';
+import { loginUser, loginUserSuccess, logoutUser } from '../../actions/login';
 import login from '../login';
 
 describe('Test for Login reducers', () => {
@@ -23,10 +19,8 @@ describe('Test for Login reducers', () => {
   });
 
   it('Should update log-in-user-success details', () => {
-    const actual = login(initialState, {
-      type: LOGIN_USER_SUCCESS,
-      payload: { token: 'test-token' }
-    });
+    const action = loginUserSuccess({ token: 'test-token' });
+    const actual = login(initialState, action);
     expect(actual).toEqual({
       isLoggedIn: true,
       loading: false,
@@ -38,9 +32,8 @@ describe('Test for Login reducers', () => {
   });
 
   it('Should update logout details', () => {
-    const actual = login(initialState, {
-      type: LOGOUT_USER
-    });
+    const action = logoutUser();
+    const actual = login(initialState, action);
     expect(actual).toEqual(initialState);
   });
 });

@@ -3,7 +3,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import Dashboard from '../components/Dashboard';
 import Loading from '../components/Loading';
 import ErrorBoundaryWrapper from '../components/ErrorBoundaryWrapper';
-import { isAuthenticated } from '../utils/TokenHandler';
+import { isAuthenticated } from '../utils/auth';
 import paths from '../utils/path';
 import NotFoundPage from '../components/NotFoundPage';
 import Login from '../components/Login';

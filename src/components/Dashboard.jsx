@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
+import { getLoginDetails } from '../selectors/login';
+import paths from '../utils/path';
 import Loading from './Loading';
 import Logout from './Logout';
 
@@ -10,7 +12,7 @@ import { AppLayout, } from './AppLayout/';
 const Dashboard = ({ loading, isLoggedIn, history }) => {
   useEffect(() => {
     if (!isLoggedIn) {
-      history.push('/');
+      history.push(paths.defaultPath);
     }
   }, [isLoggedIn, history]);
 
@@ -33,11 +35,8 @@ const Heading = styled.h1`
 `;
 
 function mapStateToProps(state) {
-  const { loading, isLoggedIn, error } = state.login;
   return {
-    loading,
-    isLoggedIn,
-    error
+    login: getLoginDetails(state)
   };
 }
 
