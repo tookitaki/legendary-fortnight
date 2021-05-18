@@ -6,3 +6,28 @@
 .site-layout .site-layout-background {
   background: #fff;
 }
+
+.sidebar {
+  background-color: #222e44 !important;
+  width: 70px !important;
+  min-width: 70px !important;
+}
+
+.sidebar-menu {
+  background-color: #222e44 !important;
+  width: 70px !important;
+  padding-top: 55px !important;
+}
+
+.sidebar-menu-item {
+  width: 70px !important;
+  height: 45px !important;
+}
+
+.sidebar-menu-item:hover {
+  background-color: #21b4bd !important;
+}
+
+.sidebar-icon {
+  font-size: 20px !important;
+}
