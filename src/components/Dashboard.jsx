@@ -23,7 +23,7 @@ const Dashboard = ({ loading, isLoggedIn, history }) => {
       <Heading m="10px" color="lightBlue" bg="persianGreen">
         By the power of styled-components!
       </Heading>
-      <Logout loading={loading} />
+      <Logout history={history} loading={loading} />
     </AppLayout>
   );
 };
