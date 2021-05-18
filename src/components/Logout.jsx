@@ -3,10 +3,11 @@ import { Button } from 'antd';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions/login';
 
-export function Logout({ loading, dispatchLogoutUser }) {
+export function Logout({ loading, dispatchLogoutUser, history }) {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatchLogoutUser();
+    history?.push('/');
   };
 
   return (

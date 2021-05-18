@@ -4,18 +4,27 @@ import { APP_CONFIG } from '../constants/appConfig';
 const apiUrl = APP_CONFIG.AUTH_URL;
 
 export async function auth(token) {
-  const requestUrl = `${apiUrl}/users/auth`;
+  // const requestUrl = `${apiUrl}/users/auth`;
 
-  const headers = {
-    Authorization: `Basic ${token}`
-  };
-  return await axios.post(requestUrl, null, { headers });
+  // const headers = {
+  //   Authorization: `Basic ${token}`
+  // };
+  // return await axios.post(requestUrl, null, { headers });
+
+  return Promise.resolve(() => {
+    return {
+      token: 'some random token'
+    };
+  });
 }
 
 export async function logout(token) {
-  const requestUrl = `${apiUrl}/users/session`;
-  const headers = {
-    Authorization: `Token ${token}`
-  };
-  return await axios.delete(requestUrl, { headers });
+  // const requestUrl = `${apiUrl}/users/session`;
+  // const headers = {
+  //   Authorization: `Token ${token}`
+  // };
+  // return await axios.delete(requestUrl, { headers });
+  return Promise.resolve(() => {
+    return;
+  });
 }
