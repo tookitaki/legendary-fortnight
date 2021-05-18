@@ -11,9 +11,6 @@ import { AppLayout, } from './AppLayout/';
 
 const Dashboard = ({ loading, isLoggedIn, history }) => {
   useEffect(() => {
-    // if (!isLoggedIn) {
-    //   history.push(paths.defaultPath);
-    // }
   }, [isLoggedIn, history]);
 
   return (

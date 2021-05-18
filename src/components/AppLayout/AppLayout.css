@@ -11,6 +11,11 @@
   background-color: #222e44 !important;
   width: 70px !important;
   min-width: 70px !important;
+
+  overflow: auto !important;
+  height: 100vh !important;
+  position: fixed !important;
+  left: 0 !important;
 }
 
 .sidebar-menu {

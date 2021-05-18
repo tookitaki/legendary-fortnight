@@ -12,12 +12,6 @@ export const AppLayout = ({ children, }) => {
   return (
     <Layout>
       <Sider
-        style={{
-          overflow: 'auto',
-          height: '100vh',
-          position: 'fixed',
-          left: 0,
-        }}
         className="sidebar"
       >
         <div className="logo" />
