@@ -8,17 +8,16 @@ import paths from '../utils/path';
 import Loading from './Loading';
 import Logout from './Logout';
 
-const Dashboard = ({ login, history }) => {
-  const { loading, isLoggedIn } = login;
+import { AppLayout, } from './AppLayout/';
+
+const Dashboard = ({ loading, isLoggedIn, history }) => {
   useEffect(() => {
-    if (!isLoggedIn) {
-      history.push(paths.defaultPath);
-    }
   }, [isLoggedIn, history]);
 
   return (
-    <div>
-      <Heading p="5px" color="persianGreen" isHeading={true}>
+    <AppLayout>
+      <div>
+        <Heading p="5px" color="persianGreen" isHeading={true}>
         Hello World
       </Heading>
       <Loading />
@@ -26,7 +25,8 @@ const Dashboard = ({ login, history }) => {
         By the power of styled-components!
       </Heading>
       <Logout loading={loading} />
-    </div>
+      </div>
+    </AppLayout>
   );
 };
 
