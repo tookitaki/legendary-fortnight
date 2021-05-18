@@ -64,7 +64,7 @@ export const AppLayout = ({ children, }) => {
     <Layout>
       <SideBar
       >
-        <MenuContainer theme="dark" mode="inline" defaultSelectedKeys={['4']}>
+        <MenuContainer theme="dark" mode="inline">
           <MenuItem key="1" icon={<HomeIcon />}>
           </MenuItem>
           <MenuItem key="2" icon={<EyeIcon />}>
@@ -74,7 +74,7 @@ export const AppLayout = ({ children, }) => {
       <SiteLayout>
         <SiteLayoutBackground />
         <SiteContent>
-          {children ? children : null}
+          {children}
         </SiteContent>
         <SiteFooter>Ant Design ©2018 Created by Ant UED</SiteFooter>
       </SiteLayout>

@@ -16,8 +16,7 @@ const Dashboard = ({ loading, isLoggedIn, history }) => {
 
   return (
     <AppLayout>
-      <div>
-        <Heading p="5px" color="persianGreen" isHeading={true}>
+      <Heading p="5px" color="persianGreen" isHeading={true}>
         Hello World
       </Heading>
       <Loading />
@@ -25,7 +24,6 @@ const Dashboard = ({ loading, isLoggedIn, history }) => {
         By the power of styled-components!
       </Heading>
       <Logout loading={loading} />
-      </div>
     </AppLayout>
   );
 };
