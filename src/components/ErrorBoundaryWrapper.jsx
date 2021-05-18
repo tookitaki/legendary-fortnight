@@ -5,10 +5,6 @@ import paths from '../utils/path';
 import history from '../utils/history';
 
 class ErrorBoundaryWrapper extends PureComponent {
-  static getDerivedStateFromError() {
-    history.push(paths.error);
-  }
-
   componentDidCatch() {
     history.push(paths.error);
   }

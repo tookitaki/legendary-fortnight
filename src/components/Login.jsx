@@ -123,6 +123,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  dispatchLoginUser: (payload) => loginUser(payload)
+  dispatchLoginUser: loginUser
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

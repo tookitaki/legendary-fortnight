@@ -1,11 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
+import { space, layout, color } from 'styled-system';
 
 const GlobalStyle = createGlobalStyle`
   body {
-    line-height: 1.4em;
-    margin: 0 auto;
-    font-weight: 400;
-    font: 12px Rubik, Roboto,'Helvetica Neue',Arial,'Open sans', sans-serif; 
+    ${space}
+    ${layout}
+    ${color}
   }
 `;
 

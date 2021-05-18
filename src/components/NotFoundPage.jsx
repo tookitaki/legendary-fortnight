@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import paths from '../utils/path';
 
 const NotFoundPage = () => {
   return (
@@ -9,7 +10,7 @@ const NotFoundPage = () => {
         Sorry, we cannot find the page you are looking for or you don&apos;t
         currently have the permission to access.
       </p>
-      <Link to="/"> Go back to homepage </Link>
+      <Link to={paths.defaultPath}> Go back to homepage </Link>
     </Div>
   );
 };

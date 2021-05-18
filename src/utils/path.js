@@ -1,9 +1,7 @@
-import { isNotNullUndefined } from './utils';
+import isNil from 'lodash/isNil';
 
 export const createPath = (param) => {
-  const basePath = isNotNullUndefined(process.env.BASE_PATH)
-    ? process.env.BASE_PATH
-    : '/';
+  const basePath = !isNil(process.env.BASE_PATH) ? process.env.BASE_PATH : '/';
   return `${basePath}${param}`;
 };
 
