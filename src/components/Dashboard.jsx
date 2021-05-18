@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
+import { layout, color, space } from 'styled-system';
 import { getLoginDetails } from '../selectors/login';
 import paths from '../utils/path';
 import Loading from './Loading';
@@ -17,9 +18,13 @@ const Dashboard = ({ login, history }) => {
 
   return (
     <div>
-      <Heading isHeading={true}>Hello World</Heading>
+      <Heading p="5px" color="persianGreen" isHeading={true}>
+        Hello World
+      </Heading>
       <Loading />
-      <h2>By the power of styled-components!</h2>
+      <Heading m="10px" color="lightBlue" bg="persianGreen">
+        By the power of styled-components!
+      </Heading>
       <Logout loading={loading} />
     </div>
   );
@@ -28,7 +33,9 @@ const Dashboard = ({ login, history }) => {
 const Heading = styled.h1`
   font-size: ${({ isHeading, theme: { fontSizes } }) =>
     isHeading ? fontSizes.large : fontSizes.small};
-  color: ${({ theme: { colors } }) => colors.persianGreen};
+  ${layout}
+  ${color}
+  ${space}
 `;
 
 function mapStateToProps(state) {

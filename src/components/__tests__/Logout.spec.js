@@ -16,7 +16,7 @@ describe('<Logout />', () => {
     expect(logout).toBeTruthy();
   });
 
-  it('should call login on click of LOGIN button', () => {
+  it('should call logout on click of LOGOUT button', () => {
     const { getByTestId } = component;
 
     const logout = getByTestId('logout');

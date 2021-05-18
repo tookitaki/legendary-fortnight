@@ -25,7 +25,7 @@ export function Logout({ loading, dispatchLogoutUser }) {
 }
 
 const mapDispatchToProps2 = {
-  dispatchLogoutUser: () => logoutUser()
+  dispatchLogoutUser: logoutUser
 };
 
 Logout.propTypes = {
