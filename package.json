@@ -12,6 +12,7 @@
     "format": "prettier ./src/**/*.{js,jsx,ts,tsx,css,html,md,json,spec.jsx,spec.js,spec.tsx,spec.ts} --config .prettierrc --write",
     "pre-commit": "lint-staged",
     "pre-push": "npm run test:nowatch",
+    "prepare": "husky install",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

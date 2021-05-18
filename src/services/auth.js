@@ -10,6 +10,12 @@ export async function auth(token) {
     Authorization: `Basic ${token}`
   };
   return await axios.post(requestUrl, null, { headers });
+  //mock api call
+  // const data = {
+  //   status: 200,
+  //   data: { token: 'erererreer' }
+  // };
+  // return data;
 }
 
 export async function logout(token) {
@@ -18,4 +24,10 @@ export async function logout(token) {
     Authorization: `Token ${token}`
   };
   return await axios.delete(requestUrl, { headers });
+  //mock api call
+  // const data = {
+  //   status: 200,
+  //   data: { token: 'erererreer' }
+  // };
+  // return data;
 }

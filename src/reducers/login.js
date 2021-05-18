@@ -1,6 +1,11 @@
 import produce from 'immer';
 
-import { LOGIN_USER, LOGIN_USER_SUCCESS, LOGOUT_USER } from '../actions/login';
+import {
+  LOGIN_USER,
+  LOGIN_USER_SUCCESS,
+  LOGIN_USER_FAIL,
+  LOGOUT_USER
+} from '../actions/login';
 import createReducer from '../utils/reducer';
 
 const initialState = { isLoggedIn: false, loading: false, error: null };
@@ -17,6 +22,11 @@ const loginUserSuccess = produce((draft, action) => {
   };
 });
 
+const loginUserFail = produce((draft, action) => {
+  draft.loading = false;
+  draft.isLoggedIn = false;
+});
+
 const logoutUser = () => {
   return initialState;
 };
@@ -24,6 +34,7 @@ const logoutUser = () => {
 const login = createReducer(initialState, {
   [LOGIN_USER]: loginUser,
   [LOGIN_USER_SUCCESS]: loginUserSuccess,
+  [LOGIN_USER_FAIL]: loginUserFail,
   [LOGOUT_USER]: logoutUser
 });
 

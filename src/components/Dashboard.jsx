@@ -1,19 +1,15 @@
-import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { layout, color, space } from 'styled-system';
 import { getLoginDetails } from '../selectors/login';
-import paths from '../utils/path';
 import Loading from './Loading';
 import Logout from './Logout';
 
-import { AppLayout, } from './AppLayout/';
+import { AppLayout } from './AppLayout/';
 
-const Dashboard = ({ loading, isLoggedIn, history }) => {
-  useEffect(() => {
-  }, [isLoggedIn, history]);
-
+const Dashboard = ({ login, history }) => {
+  const { loading } = login;
   return (
     <AppLayout>
       <Heading p="5px" color="persianGreen" isHeading={true}>
@@ -23,7 +19,7 @@ const Dashboard = ({ loading, isLoggedIn, history }) => {
       <Heading m="10px" color="lightBlue" bg="persianGreen">
         By the power of styled-components!
       </Heading>
-      <Logout loading={loading} />
+      <Logout history={history} loading={loading} />
     </AppLayout>
   );
 };
