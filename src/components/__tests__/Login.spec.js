@@ -1,6 +1,7 @@
 import { Login } from '../Login';
 import history from '../../utils/history';
 import { fireEvent, render } from '@testing-library/react';
+import { mockWindowMatchmedia } from '../../utils/setupTests';
 
 //mocking other components
 jest.mock('../Logout', () => () => <div>Logout</div>);
@@ -8,21 +9,8 @@ jest.mock('../Logout', () => () => <div>Logout</div>);
 describe('<Login />', () => {
   let props, component;
   beforeEach(() => {
-    //Manual Mock 'window.matchMedia'
-    Object.defineProperty(window, 'matchMedia', {
-      writable: true,
-      value: jest.fn().mockImplementation((query) => ({
-        matches: false,
-        media: query,
-        onchange: null,
-        addListener: jest.fn(), // Deprecated
-        removeListener: jest.fn(), // Deprecated
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
-        dispatchEvent: jest.fn()
-      }))
-    });
-    history.push = jest.fn();
+    mockWindowMatchmedia();
+    history.push = jest.spyOn(history, 'push');
     props = {
       login: {
         loading: false,

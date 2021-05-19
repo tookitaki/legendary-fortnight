@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { loginUser } from '../actions/login';
 import { getLoginDetails } from '../selectors/login';
 import Logout from './Logout';
-import paths from '../utils/path';
+import paths from '../constants/path';
 
 const { Text } = Typography;
 export const Login = ({ login, dispatchLoginUser, history }) => {

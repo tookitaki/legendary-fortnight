@@ -1,9 +1,6 @@
 import { Layout, Menu } from 'antd';
 import styled from 'styled-components';
-import {
-  HomeOutlined,
-  EyeOutlined,
-} from '@ant-design/icons';
+import { HomeOutlined, EyeOutlined } from '@ant-design/icons';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -59,25 +56,20 @@ const SiteContent = styled(Content)`
   overflow: initial !important;
 `;
 
-export const AppLayout = ({ children, }) => {
+export const AppLayout = ({ children }) => {
   return (
     <Layout>
-      <SideBar
-      >
+      <SideBar>
         <MenuContainer theme="dark" mode="inline">
-          <MenuItem key="1" icon={<HomeIcon />}>
-          </MenuItem>
-          <MenuItem key="2" icon={<EyeIcon />}>
-          </MenuItem>
+          <MenuItem key="1" icon={<HomeIcon />}></MenuItem>
+          <MenuItem key="2" icon={<EyeIcon />}></MenuItem>
         </MenuContainer>
       </SideBar>
       <SiteLayout>
         <SiteLayoutBackground />
-        <SiteContent>
-          {children}
-        </SiteContent>
+        <SiteContent>{children}</SiteContent>
         <SiteFooter>Ant Design ©2018 Created by Ant UED</SiteFooter>
       </SiteLayout>
     </Layout>
   );
-}
+};

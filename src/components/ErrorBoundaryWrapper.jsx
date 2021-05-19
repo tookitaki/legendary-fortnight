@@ -1,7 +1,7 @@
 import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import paths from '../utils/path';
+import paths from '../constants/path';
 import history from '../utils/history';
 
 class ErrorBoundaryWrapper extends PureComponent {

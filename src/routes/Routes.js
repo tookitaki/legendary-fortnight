@@ -4,7 +4,7 @@ import Dashboard from '../components/Dashboard';
 import Loading from '../components/Loading';
 import ErrorBoundaryWrapper from '../components/ErrorBoundaryWrapper';
 import { isAuthenticated } from '../utils/auth';
-import paths from '../utils/path';
+import paths from '../constants/path';
 import NotFoundPage from '../components/NotFoundPage';
 import Login from '../components/Login';
 

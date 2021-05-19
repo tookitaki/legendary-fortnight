@@ -1,4 +1,4 @@
-import { createPath } from '../path';
+import { createPath } from '../general';
 
 describe('Test for Create Path', () => {
   it.each`
