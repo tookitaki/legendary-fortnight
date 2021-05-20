@@ -6,7 +6,7 @@ import { getLoginDetails } from '../selectors/login';
 import Loading from './Loading';
 import Logout from './Logout';
 
-import { AppLayout } from './AppLayout/';
+import { AppLayout } from './AppLayout';
 
 const Dashboard = ({ login, history }) => {
   const { loading } = login;
