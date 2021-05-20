@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import { layout, color, space } from 'styled-system';
 import { getLoginDetails } from '../selectors/login';
 import Loading from './Loading';

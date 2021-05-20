@@ -1,5 +1,5 @@
 import { Spin } from 'antd';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 const Loading = () => {
   return (

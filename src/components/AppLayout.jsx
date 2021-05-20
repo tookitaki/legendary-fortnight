@@ -1,5 +1,5 @@
 import { Layout, Menu } from 'antd';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import { HomeOutlined, EyeOutlined } from '@ant-design/icons';
 
 const { Header, Content, Footer, Sider } = Layout;
