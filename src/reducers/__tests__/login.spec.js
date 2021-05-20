@@ -19,14 +19,21 @@ describe('Test for Login reducers', () => {
   });
 
   it('Should update log-in-user-success details', () => {
-    const action = loginUserSuccess({ token: 'test-token' });
+    const data = {
+      token: 'test-token',
+      userId: 1,
+      name: 'tdss_user'
+    };
+    const action = loginUserSuccess({ data });
     const actual = login(initialState, action);
     expect(actual).toEqual({
       isLoggedIn: true,
       loading: false,
       error: null,
       auth: {
-        token: 'test-token'
+        token: 'test-token',
+        userId: 1,
+        name: 'tdss_user'
       }
     });
   });

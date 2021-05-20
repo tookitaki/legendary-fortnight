@@ -26,7 +26,7 @@ export function* loginUserSaga(action) {
     const authResponse = yield call(auth, action.payload);
     if (authResponse.status === 200 && authResponse.data?.token) {
       localStorage.setItem('token', authResponse.data.token);
-      yield put(loginUserSuccess({ token: authResponse.data.token }));
+      yield put(loginUserSuccess({ data: authResponse.data }));
     } else {
       localStorage.clear();
       yield put(logoutUser());

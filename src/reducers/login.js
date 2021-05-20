@@ -18,7 +18,9 @@ const loginUserSuccess = produce((draft, action) => {
   draft.loading = false;
   draft.isLoggedIn = true;
   draft.auth = {
-    token: action.payload.token
+    token: action.payload.data.token,
+    userId: action.payload.data.userId,
+    name: action.payload.data.name
   };
 });
 

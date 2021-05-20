@@ -13,7 +13,7 @@ export async function auth(token) {
   //mock api call
   // const data = {
   //   status: 200,
-  //   data: { token: 'erererreer' }
+  //   data: { token: 'erererreer', userId: 1, name: 'tdss_user' }
   // };
   // return data;
 }
