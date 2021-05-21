@@ -14,7 +14,6 @@ describe('<Login />', () => {
     props = {
       login: {
         loading: false,
-        isLoggedIn: false,
         error: null
       },
       dispatchLoginUser: jest.fn(),
@@ -45,7 +44,9 @@ describe('<Login />', () => {
     const login = getByTestId('login');
     fireEvent.click(login, { preventDefault: jest.fn() });
 
-    const str = `test-username:test-password`;
-    expect(props.dispatchLoginUser).toHaveBeenCalledWith(btoa(str));
+    expect(props.dispatchLoginUser).toHaveBeenCalledWith({
+      username: 'test-username',
+      password: 'test-password'
+    });
   });
 });

@@ -25,7 +25,7 @@ const PrivateRoute = ({ isLoggedIn, component: Component, ...rest }) => (
 
 const Routes = () => {
   const { defaultPath, dashboard, error } = PATH;
-  const { isLoggedIn } = useSelector((state) => state.login);
+  const { token } = useSelector((state) => state.login);
   return (
     <React.Suspense fallback={<Loading />}>
       <Switch>
@@ -33,7 +33,7 @@ const Routes = () => {
         <PrivateRoute
           exact
           path={dashboard}
-          isLoggedIn={isLoggedIn}
+          isLoggedIn={Boolean(token)}
           component={Dashboard}
         />
         <Route exact path={error} component={NotFoundPage} />

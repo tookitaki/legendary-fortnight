@@ -8,25 +8,22 @@ import {
 } from '../actions/login';
 import createReducer from '../utils/reducer';
 
-const initialState = { isLoggedIn: false, loading: false, error: null };
+export const initialState = { loading: false, token: null, error: null };
 
 const loginUser = produce((draft, action) => {
   draft.loading = true;
+  draft.error = null;
 });
 
-const loginUserSuccess = produce((draft, action) => {
+const loginUserSuccess = produce((draft, { payload: { token } }) => {
   draft.loading = false;
-  draft.isLoggedIn = true;
-  draft.auth = {
-    token: action.payload.data.token,
-    userId: action.payload.data.userId,
-    name: action.payload.data.name
-  };
+  draft.token = token;
+  draft.error = null;
 });
 
-const loginUserFail = produce((draft, action) => {
+const loginUserFail = produce((draft, { payload: { error } }) => {
   draft.loading = false;
-  draft.isLoggedIn = false;
+  draft.error = error;
 });
 
 const logoutUser = () => {

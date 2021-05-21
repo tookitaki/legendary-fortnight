@@ -7,11 +7,10 @@ import { loginUser } from '../actions/login';
 import { getLoginDetails } from '../selectors/login';
 import Logout from './Logout';
 import PATH from '../constants/path';
-import { setItemToLocalStorage } from '../utils/general';
 
 const { Text } = Typography;
 export const Login = ({ login, dispatchLoginUser, history }) => {
-  const { loading, isLoggedIn, error } = login;
+  const { loading, token, error } = login;
   const [state, setState] = useState({
     username: '',
     password: ''
@@ -19,16 +18,14 @@ export const Login = ({ login, dispatchLoginUser, history }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const str = `${state.username}:${state.password}`;
-    setItemToLocalStorage('user', state.username);
-    dispatchLoginUser(btoa(str));
+    dispatchLoginUser({ username: state.username, password: state.password });
   };
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (token) {
       history.push(PATH.dashboard);
     }
-  }, [isLoggedIn, history]);
+  }, [token, history]);
 
   const onChange = (key, e) => {
     state[key] = e.target.value;
@@ -124,17 +121,15 @@ Login.propTypes = {
   dispatchLoginUser: PropTypes.func,
   login: PropTypes.shape({
     loading: PropTypes.bool,
-    isLoggedIn: PropTypes.bool,
+    userId: PropTypes.bool,
     error: PropTypes.string
   }),
   history: PropTypes.object
 };
 
-const mapStateToProps = (state) => {
-  return {
-    login: getLoginDetails(state)
-  };
-};
+const mapStateToProps = (state) => ({
+  login: getLoginDetails(state)
+});
 
 const mapDispatchToProps = {
   dispatchLoginUser: loginUser

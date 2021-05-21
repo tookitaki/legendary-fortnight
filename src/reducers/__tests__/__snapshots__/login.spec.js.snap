@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test for Login reducers Should update log-in-user details 1`] = `
+Object {
+  "error": null,
+  "loading": true,
+  "token": null,
+}
+`;
+
+exports[`Test for Login reducers Should update log-in-user-success details 1`] = `
+Object {
+  "error": null,
+  "loading": false,
+  "token": undefined,
+}
+`;
+
+exports[`Test for Login reducers Should update logout details 1`] = `
+Object {
+  "error": null,
+  "loading": false,
+  "token": null,
+}
+`;
+
+exports[`Test for Login reducers should have correct initial state 1`] = `
+Object {
+  "error": null,
+  "loading": false,
+  "token": null,
+}
+`;
