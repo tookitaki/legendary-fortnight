@@ -121,7 +121,6 @@ Login.propTypes = {
   dispatchLoginUser: PropTypes.func,
   login: PropTypes.shape({
     loading: PropTypes.bool,
-    userId: PropTypes.bool,
     error: PropTypes.string
   }),
   history: PropTypes.object
