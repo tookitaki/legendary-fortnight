@@ -1,8 +1,8 @@
 import { Spin } from 'antd';
 import styled from 'styled-components/macro';
 
-const Loading = () => {
-  return <StyledSpin size="large" />;
+const Loading = ({ className }) => {
+  return <StyledSpin className={className} size="large" />;
 };
 
 const StyledSpin = styled(Spin)`

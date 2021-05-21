@@ -1,24 +1,6 @@
-import { all, takeEvery, put, call, select } from 'redux-saga/effects';
-import { login, logout } from '../services/auth';
-import {
-  LOGIN_USER,
-  LOGOUT_USER,
-  loginUserSuccess,
-  loginUserFail,
-  clearLoginInfo
-} from '../actions/login';
-import { getLoginDetails } from '../selectors/login';
-
-export function* logoutUserSaga() {
-  try {
-    const { token } = yield select(getLoginDetails);
-    yield call(logout, token);
-  } catch (error) {
-    console.error(error);
-  } finally {
-    yield put(clearLoginInfo());
-  }
-}
+import { all, takeEvery, put, call } from 'redux-saga/effects';
+import { login } from '../services/auth';
+import { LOGIN_USER, loginUserSuccess, loginUserFail } from '../actions/login';
 
 export function* loginUserSaga({ payload: { username, password } }) {
   try {
@@ -36,8 +18,5 @@ export function* loginUserSaga({ payload: { username, password } }) {
 }
 
 export default function* loginSaga() {
-  yield all([
-    takeEvery(LOGIN_USER, loginUserSaga),
-    takeEvery(LOGOUT_USER, logoutUserSaga)
-  ]);
+  yield all([takeEvery(LOGIN_USER, loginUserSaga)]);
 }
