@@ -1,8 +1,9 @@
-export const getLoginDetails = (state) => {
-  const { loading, isLoggedIn, error } = state.login;
-  return {
-    loading,
-    isLoggedIn,
-    error
-  };
-};
+export const getLoginDetails = ({
+  login: { loading, token, userId, name, error }
+}) => ({
+  loading,
+  token,
+  userId,
+  name,
+  error
+});

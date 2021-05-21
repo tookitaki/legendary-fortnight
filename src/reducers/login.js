@@ -4,32 +4,39 @@ import {
   LOGIN_USER,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
-  LOGOUT_USER
+  CLEAR_LOGIN_INFO
 } from '../actions/login';
 import createReducer from '../utils/reducer';
 
-const initialState = { isLoggedIn: false, loading: false, error: null };
+export const initialState = {
+  loading: false,
+  token: null,
+  userId: null,
+  name: null,
+  error: null
+};
 
 const loginUser = produce((draft, action) => {
   draft.loading = true;
+  draft.error = null;
 });
 
-const loginUserSuccess = produce((draft, action) => {
+const loginUserSuccess = produce(
+  (draft, { payload: { token, userId, name } }) => {
+    draft.loading = false;
+    draft.token = token;
+    draft.userId = userId;
+    draft.name = name;
+    draft.error = null;
+  }
+);
+
+const loginUserFail = produce((draft, { payload: { error } }) => {
   draft.loading = false;
-  draft.isLoggedIn = true;
-  draft.auth = {
-    token: action.payload.data.token,
-    userId: action.payload.data.userId,
-    name: action.payload.data.name
-  };
+  draft.error = error;
 });
 
-const loginUserFail = produce((draft, action) => {
-  draft.loading = false;
-  draft.isLoggedIn = false;
-});
-
-const logoutUser = () => {
+const clearLoginInfo = () => {
   return initialState;
 };
 
@@ -37,7 +44,7 @@ const login = createReducer(initialState, {
   [LOGIN_USER]: loginUser,
   [LOGIN_USER_SUCCESS]: loginUserSuccess,
   [LOGIN_USER_FAIL]: loginUserFail,
-  [LOGOUT_USER]: logoutUser
+  [CLEAR_LOGIN_INFO]: clearLoginInfo
 });
 
 export default login;

@@ -1,42 +1,37 @@
-import { all, takeEvery, put, call } from 'redux-saga/effects';
-import { auth, logout } from '../services/auth';
+import { all, takeEvery, put, call, select } from 'redux-saga/effects';
+import { login, logout } from '../services/auth';
 import {
   LOGIN_USER,
   LOGOUT_USER,
-  logoutUser,
   loginUserSuccess,
-  loginUserFail
+  loginUserFail,
+  clearLoginInfo
 } from '../actions/login';
-import {
-  clearLocalStorage,
-  getItemFromLocalStorage,
-  setItemToLocalStorage
-} from '../utils/general';
+import { getLoginDetails } from '../selectors/login';
 
 export function* logoutUserSaga() {
   try {
-    const token = getItemFromLocalStorage('token');
-    const authResponse = yield call(logout, token);
-    if (authResponse.status === 200) {
-      clearLocalStorage();
-    }
+    const { token } = yield select(getLoginDetails);
+    yield call(logout, token);
   } catch (error) {
-    yield put(logoutUser());
+    console.error(error);
+  } finally {
+    yield put(clearLoginInfo());
   }
 }
 
-export function* loginUserSaga(action) {
+export function* loginUserSaga({ payload: { username, password } }) {
   try {
-    const authResponse = yield call(auth, action.payload);
+    const authResponse = yield call(login, { username, password });
     if (authResponse.status === 200 && authResponse.data?.token) {
-      setItemToLocalStorage('token', authResponse.data.token);
-      yield put(loginUserSuccess({ data: authResponse.data }));
+      const { token, userId, name } = authResponse.data;
+
+      yield put(loginUserSuccess({ token, userId, name }));
     } else {
-      clearLocalStorage();
-      yield put(logoutUser());
+      yield put(loginUserFail({ error: 'Unable to login' }));
     }
   } catch (error) {
-    yield put(loginUserFail());
+    yield put(loginUserFail({ error }));
   }
 }
 

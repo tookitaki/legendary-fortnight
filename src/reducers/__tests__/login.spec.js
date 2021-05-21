@@ -1,46 +1,35 @@
-import { loginUser, loginUserSuccess, logoutUser } from '../../actions/login';
+import {
+  loginUser,
+  loginUserSuccess,
+  clearLoginInfo
+} from '../../actions/login';
 import login from '../login';
 
+const initialState = login(undefined, { type: 'UNHANDLED' });
+
 describe('Test for Login reducers', () => {
-  const initialState = {
-    isLoggedIn: false,
-    loading: false,
-    error: null
-  };
+  it('should have correct initial state', () => {
+    expect(initialState).toMatchSnapshot();
+  });
 
   it('Should update log-in-user details', () => {
     const action = loginUser();
     const actual = login(initialState, action);
-    expect(actual).toEqual({
-      isLoggedIn: false,
-      loading: true,
-      error: null
-    });
+    expect(actual).toMatchSnapshot();
   });
 
   it('Should update log-in-user-success details', () => {
     const data = {
-      token: 'test-token',
-      userId: 1,
-      name: 'tdss_user'
+      token: 'test-token'
     };
     const action = loginUserSuccess({ data });
     const actual = login(initialState, action);
-    expect(actual).toEqual({
-      isLoggedIn: true,
-      loading: false,
-      error: null,
-      auth: {
-        token: 'test-token',
-        userId: 1,
-        name: 'tdss_user'
-      }
-    });
+    expect(actual).toMatchSnapshot();
   });
 
-  it('Should update logout details', () => {
-    const action = logoutUser();
-    const actual = login(initialState, action);
-    expect(actual).toEqual(initialState);
+  it('Should clear login info', () => {
+    const action = clearLoginInfo();
+    const actual = login({ ...initialState, token: 'token' }, action);
+    expect(actual).toMatchSnapshot();
   });
 });

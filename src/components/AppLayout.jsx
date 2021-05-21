@@ -4,7 +4,7 @@ import { HomeOutlined, EyeOutlined } from '@ant-design/icons';
 
 const { Header, Content, Footer, Sider } = Layout;
 
-export const AppLayout = ({ children }) => {
+const AppLayout = ({ children }) => {
   return (
     <Layout>
       <SideBar width={70}>
@@ -93,3 +93,5 @@ const SiteContent = styled(Content)`
     overflow: initial;
   }
 `;
+
+export default AppLayout;
