@@ -21,11 +21,9 @@ export function* loginUserSaga({ payload: { username, password } }) {
   try {
     const authResponse = yield call(login, { username, password });
     if (authResponse.status === 200 && authResponse.data?.token) {
-      yield put(
-        loginUserSuccess({
-          token: authResponse.data.token
-        })
-      );
+      const { token, userId, name } = authResponse.data;
+
+      yield put(loginUserSuccess({ token, userId, name }));
     } else {
       yield put(loginUserFail({ error: 'Unable to login' }));
     }

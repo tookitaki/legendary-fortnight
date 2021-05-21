@@ -4,19 +4,15 @@ import { APP_CONFIG } from '../constants/appConfig';
 const apiUrl = APP_CONFIG.AUTH_URL;
 
 export async function login({ username, password }) {
-  const requestUrl = `${apiUrl}/users/login`;
+  const requestUrl = `${apiUrl}/users/auth`;
+
+  const encodedCredentials = window.btoa(`${username}:${password}`);
 
   const headers = {
-    'Access-Control-Allow-Origin': '*'
+    Authorization: `Basic ${encodedCredentials}`
   };
 
-  const convertedCredentials = window.btoa(`${username}:${password}`);
-
-  return await axios.post(
-    requestUrl,
-    { credentials: convertedCredentials },
-    { headers }
-  );
+  return await axios.post(requestUrl, null, { headers });
 }
 
 export async function logout(token) {
