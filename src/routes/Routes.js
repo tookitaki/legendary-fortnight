@@ -3,20 +3,20 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import Dashboard from '../components/Dashboard';
 import Loading from '../components/Loading';
 import ErrorBoundaryWrapper from '../components/ErrorBoundaryWrapper';
-import { isAuthenticated } from '../utils/auth';
-import paths from '../constants/path';
 import NotFoundPage from '../components/NotFoundPage';
 import Login from '../components/Login';
+import PATH from '../constants/path';
+import { useSelector } from 'react-redux';
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
+const PrivateRoute = ({ isLoggedIn, component: Component, ...rest }) => (
   <ErrorBoundaryWrapper>
     <Route
       {...rest}
       render={(props) => {
-        if (isAuthenticated()) {
+        if (isLoggedIn) {
           return <Component {...props} />;
         } else {
-          return <Redirect to="/" />;
+          return <Redirect to={PATH.defaultPath} />;
         }
       }}
     />
@@ -24,12 +24,18 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 );
 
 const Routes = () => {
-  const { defaultPath, dashboard, error } = paths;
+  const { defaultPath, dashboard, error } = PATH;
+  const { isLoggedIn } = useSelector((state) => state.login);
   return (
     <React.Suspense fallback={<Loading />}>
       <Switch>
         <Route exact path={defaultPath} component={Login} />
-        <PrivateRoute exact path={dashboard} component={Dashboard} />
+        <PrivateRoute
+          exact
+          path={dashboard}
+          isLoggedIn={isLoggedIn}
+          component={Dashboard}
+        />
         <Route exact path={error} component={NotFoundPage} />
       </Switch>
     </React.Suspense>

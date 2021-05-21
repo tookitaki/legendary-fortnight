@@ -1,7 +1,7 @@
 import { Login } from '../Login';
 import history from '../../utils/history';
 import { fireEvent, render } from '@testing-library/react';
-import { mockWindowMatchmedia } from '../../utils/setupTests';
+import { mockWindowMatchmedia } from '../../utils/tests';
 
 //mocking other components
 jest.mock('../Logout', () => () => <div>Logout</div>);
@@ -24,7 +24,7 @@ describe('<Login />', () => {
   });
 
   afterEach(() => {
-    history.push.mockClear();
+    history.push.mockRestore();
   });
 
   it('should render login component with dispaly text Login', () => {

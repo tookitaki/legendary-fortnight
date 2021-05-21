@@ -4,6 +4,24 @@ import { HomeOutlined, EyeOutlined } from '@ant-design/icons';
 
 const { Header, Content, Footer, Sider } = Layout;
 
+export const AppLayout = ({ children }) => {
+  return (
+    <Layout>
+      <SideBar width={70}>
+        <MenuContainer theme="dark" mode="inline">
+          <MenuItem key="1" icon={<HomeIcon />}></MenuItem>
+          <MenuItem key="2" icon={<EyeIcon />}></MenuItem>
+        </MenuContainer>
+      </SideBar>
+      <SiteLayout>
+        <SiteLayoutBackground />
+        <SiteContent>{children}</SiteContent>
+        <SiteFooter>Ant Design ©2018 Created by Ant UED</SiteFooter>
+      </SiteLayout>
+    </Layout>
+  );
+};
+
 const SideBar = styled(Sider)`
   &&& {
     background-color: #222e44;
@@ -75,21 +93,3 @@ const SiteContent = styled(Content)`
     overflow: initial;
   }
 `;
-
-export const AppLayout = ({ children }) => {
-  return (
-    <Layout>
-      <SideBar width={70}>
-        <MenuContainer theme="dark" mode="inline">
-          <MenuItem key="1" icon={<HomeIcon />}></MenuItem>
-          <MenuItem key="2" icon={<EyeIcon />}></MenuItem>
-        </MenuContainer>
-      </SideBar>
-      <SiteLayout>
-        <SiteLayoutBackground />
-        <SiteContent>{children}</SiteContent>
-        <SiteFooter>Ant Design ©2018 Created by Ant UED</SiteFooter>
-      </SiteLayout>
-    </Layout>
-  );
-};

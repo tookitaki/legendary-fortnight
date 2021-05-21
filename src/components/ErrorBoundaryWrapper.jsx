@@ -1,17 +1,17 @@
 import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import paths from '../constants/path';
+import PATH from '../constants/path';
 import history from '../utils/history';
 
 class ErrorBoundaryWrapper extends PureComponent {
   componentDidCatch() {
-    history.push(paths.error);
+    history.push(PATH.error);
   }
 
   render() {
     const { children } = this.props;
-    return <>{children}</>;
+    return children;
   }
 }
 

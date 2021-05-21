@@ -7,15 +7,19 @@ import {
   loginUserSuccess,
   loginUserFail
 } from '../actions/login';
+import {
+  clearLocalStorage,
+  getItemFromLocalStorage,
+  setItemToLocalStorage
+} from '../utils/general';
 
 export function* logoutUserSaga() {
   try {
-    const token = localStorage.getItem('token');
+    const token = getItemFromLocalStorage('token');
     const authResponse = yield call(logout, token);
     if (authResponse.status === 200) {
-      localStorage.removeItem('token');
+      clearLocalStorage();
     }
-    localStorage.removeItem('token');
   } catch (error) {
     yield put(logoutUser());
   }
@@ -25,10 +29,10 @@ export function* loginUserSaga(action) {
   try {
     const authResponse = yield call(auth, action.payload);
     if (authResponse.status === 200 && authResponse.data?.token) {
-      localStorage.setItem('token', authResponse.data.token);
+      setItemToLocalStorage('token', authResponse.data.token);
       yield put(loginUserSuccess({ data: authResponse.data }));
     } else {
-      localStorage.clear();
+      clearLocalStorage();
       yield put(logoutUser());
     }
   } catch (error) {

@@ -2,19 +2,17 @@ import { Spin } from 'antd';
 import styled from 'styled-components/macro';
 
 const Loading = () => {
-  return (
-    <Div>
-      <Spin size="large" />
-    </Div>
-  );
+  return <StyledSpin size="large" />;
 };
 
-const Div = styled.div`
-  position: fixed;
-  top: 0;
-  left: 50%;
-  color: '#3F516F';
-  font-size: 14px;
+const StyledSpin = styled(Spin)`
+  &&& {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    color: #af156c;
+    font-size: 14px;
+  }
 `;
 
 export default Loading;
