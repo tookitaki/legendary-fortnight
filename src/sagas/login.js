@@ -4,16 +4,19 @@ import {
   LOGIN_USER,
   LOGOUT_USER,
   loginUserSuccess,
-  loginUserFail
+  loginUserFail,
+  clearLoginInfo
 } from '../actions/login';
 import { getLoginDetails } from '../selectors/login';
 
 export function* logoutUserSaga() {
   try {
-    const { token } = select(getLoginDetails);
+    const { token } = yield select(getLoginDetails);
     yield call(logout, token);
   } catch (error) {
     console.error(error);
+  } finally {
+    yield put(clearLoginInfo());
   }
 }
 

@@ -1,4 +1,8 @@
-import { loginUser, loginUserSuccess, logoutUser } from '../../actions/login';
+import {
+  loginUser,
+  loginUserSuccess,
+  clearLoginInfo
+} from '../../actions/login';
 import login from '../login';
 
 const initialState = login(undefined, { type: 'UNHANDLED' });
@@ -23,9 +27,9 @@ describe('Test for Login reducers', () => {
     expect(actual).toMatchSnapshot();
   });
 
-  it('Should update logout details', () => {
-    const action = logoutUser();
-    const actual = login(initialState, action);
+  it('Should clear login info', () => {
+    const action = clearLoginInfo();
+    const actual = login({ ...initialState, token: 'token' }, action);
     expect(actual).toMatchSnapshot();
   });
 });
