@@ -1,13 +1,25 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
+import { PersistGate } from 'redux-persist/integration/react';
 import './index.css';
-import App from './App';
+import { Provider } from 'react-redux';
+import Theme from './theme/Theme';
+import store, { persistor } from './reducers/store';
+import Routes from './routes/Routes';
+import history from './utils/history';
 import reportWebVitals from './reportWebVitals';
+import { Router } from 'react-router';
+import 'antd/dist/antd.css';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Theme>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Router history={history}>
+          <Routes />
+        </Router>
+      </PersistGate>
+    </Provider>
+  </Theme>,
   document.getElementById('root')
 );
 
