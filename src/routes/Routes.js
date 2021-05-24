@@ -30,12 +30,14 @@ const Routes = () => {
     <React.Suspense fallback={<Loading />}>
       <Switch>
         <Route exact path={defaultPath} component={Login} />
-        <PrivateRoute
+        {/* <PrivateRoute
           exact
           path={dashboard}
           isLoggedIn={Boolean(token)}
           component={Dashboard}
-        />
+        /> */}
+
+        <Route exact path={dashboard} component={Dashboard} />
         <Route exact path={error} component={NotFoundPage} />
       </Switch>
     </React.Suspense>
