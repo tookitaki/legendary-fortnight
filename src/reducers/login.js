@@ -21,19 +21,19 @@ const loginUser = produce((draft, action) => {
   draft.error = null;
 });
 
-const loginUserSuccess = produce((draft, action) => {
-  draft.loading = false;
-  draft.isLoggedIn = true;
-  draft.data = {
-    token: action.payload.data.token,
-    userId: action.payload.data.userId,
-    name: action.payload.data.name
-  };
-});
+const loginUserSuccess = produce(
+  (draft, { payload: { token, userId, name } }) => {
+    draft.loading = false;
+    draft.token = token;
+    draft.userId = userId;
+    draft.name = name;
+    draft.error = null;
+  }
+);
 
-const loginUserFail = produce((draft, action) => {
+const loginUserFail = produce((draft, { payload: { error } }) => {
   draft.loading = false;
-  draft.error = action.payload;
+  draft.error = error;
 });
 
 const login = createReducer(initialState, {
