@@ -1,32 +1,85 @@
+import React from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 import styled from 'styled-components/macro';
+import { getLoginDetails } from '../selectors/login';
 import { HomeOutlined, EyeOutlined } from '@ant-design/icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const { Header, Content, Footer, Sider } = Layout;
 
-const AppLayout = ({ children }) => {
-  return (
-    <Layout>
-      <SideBar width={70}>
-        <MenuContainer theme="dark" mode="inline">
-          <MenuItem key="1" icon={<HomeIcon />}></MenuItem>
-          <MenuItem key="2" icon={<EyeIcon />}></MenuItem>
-        </MenuContainer>
-      </SideBar>
-      <SiteLayout>
-        <SiteLayoutBackground />
-        <SiteContent>{children}</SiteContent>
-        <SiteFooter>Ant Design ©2018 Created by Ant UED</SiteFooter>
-      </SiteLayout>
-    </Layout>
-  );
-};
+class AppLayout extends React.Component {
+  state = {
+    collapsed: true
+  };
+
+  onCollapse = (collapsed) => {
+    this.setState({ collapsed });
+  };
+
+  render() {
+    const { collapsed } = this.state;
+    const { login, children } = this.props;
+
+    // const { name, } = login.data;
+    return (
+      <LayoutContainer>
+        <TopBar width={48}>
+          <FontAwesomeIcon icon="coffee" />
+          <div className="logo" />
+          <HeaderMenuContainer theme="dark" mode="horizontal">
+            <UserMenuItem key="1">{`samplename`}</UserMenuItem>
+          </HeaderMenuContainer>
+        </TopBar>
+        <Layout>
+          <SideBar
+            collapsible
+            collapsed={collapsed}
+            onCollapse={this.onCollapse}>
+            <SideBarMenuContainer theme="dark" mode="inline">
+              <MenuItem key="1" icon={<HomeIcon />}>
+                {' '}
+                Home{' '}
+              </MenuItem>
+              <MenuItem key="2" icon={<EyeIcon />}>
+                {' '}
+                Option 2{' '}
+              </MenuItem>
+            </SideBarMenuContainer>
+          </SideBar>
+          <SiteLayout>
+            <SiteLayoutBackground />
+            {collapsed ? (
+              <SiteContentCollapsed>{children}</SiteContentCollapsed>
+            ) : (
+              <SiteContent>{children}</SiteContent>
+            )}
+            {/* <SiteFooter>Ant Design ©2018 Created by Ant UED</SiteFooter> */}
+          </SiteLayout>
+        </Layout>
+      </LayoutContainer>
+    );
+  }
+}
+
+const LayoutContainer = styled(Layout)`
+  &&& {
+    overflow: hidden;
+  }
+`;
+
+const TopBar = styled(Header)`
+  &&& {
+    background-color: #222e44;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+`;
 
 const SideBar = styled(Sider)`
   &&& {
     background-color: #222e44;
-    width: 70px;
-    min-width: 70px;
 
     overflow: auto;
     height: 100vh;
@@ -35,16 +88,32 @@ const SideBar = styled(Sider)`
   }
 `;
 
-const MenuContainer = styled(Menu)`
+const HeaderMenuContainer = styled(Menu)`
+  &&& {
+    background-color: #222e44;
+    margin-left: 75vw;
+  }
+`;
+
+const SideBarMenuContainer = styled(Menu)`
   &&& {
     background-color: #222e44;
     padding-top: 55px;
   }
 `;
 
+const UserMenuItem = styled(Menu.Item)`
+  &&& {
+    font-size: 14px;
+    color: #fff;
+    :hover {
+      background-color: #21b4bd;
+    }
+  }
+`;
+
 const MenuItem = styled(Menu.Item)`
   &&& {
-    width: 70px;
     height: 45px;
     :hover {
       background-color: #21b4bd;
@@ -68,6 +137,7 @@ const SiteLayout = styled(Layout)`
   &&& {
     background: #fff;
     margin-left: 70px;
+    width: 100%;
   }
 `;
 
@@ -90,9 +160,21 @@ const SiteFooter = styled(Footer)`
 
 const SiteContent = styled(Content)`
   &&& {
-    margin: 24px 16px 70px;
-    overflow: initial;
+    margin-left: 150px;
+    margin-right: 25px;
   }
 `;
 
-export default AppLayout;
+const SiteContentCollapsed = styled(Content)`
+  &&& {
+    margin: 0 16px;
+  }
+`;
+
+function mapStateToProps(state) {
+  return {
+    login: getLoginDetails(state)
+  };
+}
+
+export default withRouter(connect(mapStateToProps, null)(AppLayout));

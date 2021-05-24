@@ -38,7 +38,7 @@ const Dashboard = ({
   });
 
   return (
-    <AppLayout>
+    <AppLayout history={history}>
       <Heading p="5px" color="persianGreen" isHeading={true}>
         Hello World
       </Heading>
