@@ -12,11 +12,3 @@ export async function login({ username, password }) {
 
   return await axios.post(requestUrl, null, { headers });
 }
-
-export async function logout(token) {
-  const requestUrl = `${API_URL}/users/session`;
-  const headers = {
-    Authorization: `Token ${token}`
-  };
-  return await axios.delete(requestUrl, { headers });
-}

@@ -84,12 +84,13 @@ const SiteFooter = styled(Footer)`
     position: fixed;
     bottom: 0;
     width: 100vw;
+    height: 70px;
   }
 `;
 
 const SiteContent = styled(Content)`
   &&& {
-    margin: 24px 16px 0;
+    margin: 24px 16px 70px;
     overflow: initial;
   }
 `;

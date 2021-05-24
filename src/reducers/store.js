@@ -5,6 +5,7 @@ import storage from 'redux-persist/lib/storage';
 
 import appReducer from './index';
 import rootSaga from '../sagas/index';
+import apiMiddleware from '../middlewares/api';
 
 const persistConfig = {
   key: 'tookitaki',
@@ -22,11 +23,11 @@ const persistConfig = {
 const rootReducer = (state, action) => {
   return appReducer(state, action);
 };
-
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const sagaMiddleware = createSagaMiddleware();
 const middlewares = [
+  apiMiddleware,
   // Add other middleware on this line...
   sagaMiddleware
 ];

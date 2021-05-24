@@ -1,7 +1,7 @@
 import {
   loginUser,
   loginUserSuccess,
-  clearLoginInfo
+  clearUserData
 } from '../../actions/login';
 import login from '../login';
 
@@ -28,7 +28,7 @@ describe('Test for Login reducers', () => {
   });
 
   it('Should clear login info', () => {
-    const action = clearLoginInfo();
+    const action = clearUserData();
     const actual = login({ ...initialState, token: 'token' }, action);
     expect(actual).toMatchSnapshot();
   });
