@@ -6,6 +6,7 @@ import styled from 'styled-components/macro';
 import { getLoginDetails } from '../selectors/login';
 import { HomeOutlined, EyeOutlined, LogoutOutlined } from '@ant-design/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import PATH from '../constants/path';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -21,7 +22,7 @@ class AppLayout extends React.Component {
   onLogout = () => {
     const { history } = this.props;
 
-    history?.push('/');
+    history?.push(PATH.defaultPath);
   };
 
   render() {
