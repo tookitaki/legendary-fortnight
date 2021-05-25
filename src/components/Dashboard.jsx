@@ -10,7 +10,6 @@ import { FETCH_PRODUCTS, fetchProducts } from '../actions/products';
 import { isLoadingSelector, getErrorSelector } from '../selectors/network';
 import { useRequestIsDone } from '../hooks/network';
 import Loading from './Loading';
-import Logout from './Logout';
 import Box from './Box';
 
 import AppLayout from './AppLayout';
@@ -23,8 +22,6 @@ const Dashboard = ({
   productsLoading,
   productsError
 }) => {
-  const { loading } = login;
-
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);

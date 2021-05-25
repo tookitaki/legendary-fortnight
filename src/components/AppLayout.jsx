@@ -4,9 +4,11 @@ import { withRouter } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 import styled from 'styled-components/macro';
 import { getLoginDetails } from '../selectors/login';
-import { HomeOutlined, EyeOutlined, LogoutOutlined } from '@ant-design/icons';
+import { HomeOutlined, LogoutOutlined } from '@ant-design/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PATH from '../constants/path';
+import { logoutUser } from '../actions/login';
+import Box from './Box';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -20,23 +22,22 @@ class AppLayout extends React.Component {
   };
 
   onLogout = () => {
-    const { history } = this.props;
-
+    const { dispatchLogoutUser, history } = this.props;
+    dispatchLogoutUser();
     history?.push(PATH.defaultPath);
   };
 
   render() {
     const { collapsed } = this.state;
     const { login, children } = this.props;
-
-    // const { name, } = login.data;
+    const { name } = login;
     return (
       <LayoutContainer>
         <TopBar width={48}>
           <FontAwesomeIcon icon="coffee" />
           <div className="logo" />
           <HeaderMenuContainer theme="dark" mode="horizontal">
-            <UserMenuItem key="1">{`samplename`}</UserMenuItem>
+            <UserMenuItem key="1">{name}</UserMenuItem>
           </HeaderMenuContainer>
         </TopBar>
         <Layout>
@@ -61,11 +62,24 @@ class AppLayout extends React.Component {
           <SiteLayout>
             <SiteLayoutBackground />
             {collapsed ? (
-              <SiteContentCollapsed>{children}</SiteContentCollapsed>
+              <SiteContentCollapsed>
+                <Box display="flex" flexDirection="column" alignItems="center">
+                  {children}
+                </Box>
+                <SiteFooter>
+                  <b>Copyright</b> Tookitaki Technologies Pvt Ltd © 2021 |
+                </SiteFooter>
+              </SiteContentCollapsed>
             ) : (
-              <SiteContent>{children}</SiteContent>
+              <SiteContent>
+                <Box display="flex" flexDirection="column" alignItems="center">
+                  {children}
+                </Box>
+                <SiteFooter>
+                  <b>Copyright</b> Tookitaki Technologies Pvt Ltd © 2021 |
+                </SiteFooter>
+              </SiteContent>
             )}
-            {/* <SiteFooter>Ant Design ©2018 Created by Ant UED</SiteFooter> */}
           </SiteLayout>
         </Layout>
       </LayoutContainer>
@@ -140,12 +154,6 @@ const HomeIcon = styled(HomeOutlined)`
   }
 `;
 
-const EyeIcon = styled(EyeOutlined)`
-  &&& {
-    font-size: 20px;
-  }
-`;
-
 const SiteLayout = styled(Layout)`
   &&& {
     background: #fff;
@@ -167,7 +175,8 @@ const SiteFooter = styled(Footer)`
     position: fixed;
     bottom: 0;
     width: 100vw;
-    height: 70px;
+    height: 30px;
+    padding: 8px;
   }
 `;
 
@@ -184,10 +193,14 @@ const SiteContentCollapsed = styled(Content)`
   }
 `;
 
-function mapStateToProps(state) {
-  return {
-    login: getLoginDetails(state)
-  };
-}
+const mapStateToProps = (state) => ({
+  login: getLoginDetails(state)
+});
 
-export default withRouter(connect(mapStateToProps, null)(AppLayout));
+const mapDispatchToProps = {
+  dispatchLogoutUser: logoutUser
+};
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(AppLayout)
+);
