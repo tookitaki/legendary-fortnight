@@ -63,8 +63,6 @@ const Dashboard = ({
           </Box>
         )}
       </Box>
-
-      <Logout history={history} loading={loading} />
     </AppLayout>
   );
 };

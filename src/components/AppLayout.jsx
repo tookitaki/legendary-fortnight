@@ -4,8 +4,9 @@ import { withRouter } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 import styled from 'styled-components/macro';
 import { getLoginDetails } from '../selectors/login';
-import { HomeOutlined, EyeOutlined } from '@ant-design/icons';
+import { HomeOutlined, EyeOutlined, LogoutOutlined } from '@ant-design/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import PATH from '../constants/path';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -16,6 +17,12 @@ class AppLayout extends React.Component {
 
   onCollapse = (collapsed) => {
     this.setState({ collapsed });
+  };
+
+  onLogout = () => {
+    const { history } = this.props;
+
+    history?.push(PATH.defaultPath);
   };
 
   render() {
@@ -42,9 +49,12 @@ class AppLayout extends React.Component {
                 {' '}
                 Home{' '}
               </MenuItem>
-              <MenuItem key="2" icon={<EyeIcon />}>
+              <MenuItem
+                onClick={this.onLogout}
+                key="2"
+                icon={<LogoutOutlined />}>
                 {' '}
-                Option 2{' '}
+                Log out{' '}
               </MenuItem>
             </SideBarMenuContainer>
           </SideBar>
@@ -74,6 +84,9 @@ const TopBar = styled(Header)`
     background-color: #222e44;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
     z-index: 1;
+    position: fixed;
+    top: 0;
+    width: 100vw;
   }
 `;
 
@@ -98,7 +111,7 @@ const HeaderMenuContainer = styled(Menu)`
 const SideBarMenuContainer = styled(Menu)`
   &&& {
     background-color: #222e44;
-    padding-top: 55px;
+    padding-top: 75px;
   }
 `;
 
