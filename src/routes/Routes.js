@@ -8,6 +8,8 @@ import paths from '../constants/path';
 import NotFoundPage from '../components/NotFoundPage';
 import Login from '../components/Login';
 
+import Pipelines from '../components/Pipelines';
+
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <ErrorBoundaryWrapper>
     <Route
@@ -24,11 +26,12 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 );
 
 const Routes = () => {
-  const { defaultPath, dashboard, error } = paths;
+  const { defaultPath, dashboard, error, pipelines } = paths;
   return (
     <React.Suspense fallback={<Loading />}>
       <Switch>
         <Route exact path={defaultPath} component={Login} />
+        <Route exact path={pipelines} component={Pipelines} />
         <PrivateRoute exact path={dashboard} component={Dashboard} />
         <Route exact path={error} component={NotFoundPage} />
       </Switch>
